@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Yassine Dahbi - Technicien Biomédical</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
+    <link rel="manifest" href="assets/site.webmanifest">
+</head>
+<body>
+
+    <div id="preloader"><div class="spinner"></div></div>
+    <div id="welcome-screen">
+        <div class="welcome-content">
+            <h2>BIENVENUE SUR MON PORTFOLIO</h2>
+            <p>Veuillez saisir votre adresse e-mail pour commencer la visite.</p>
+            <form id="welcome-form" action="https://formspree.io/f/xqalwzap" method="POST">
+                <div class="email-input-container">
+                    <input type="email" id="email-input" name="email" placeholder="Votre adresse e-mail" required>
+                    <button type="submit" id="submit-email-btn">Soumettre</button>
+                </div>
+                <p id="form-message" class="form-message"></p>
+            </form>
+        </div>
+    </div>
+
+    <button id="menu-toggle" aria-label="Ouvrir le menu">&#9776;</button>
+    <button id="theme-toggle" aria-label="Changer de thème">
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.106a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.836 17.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.894 17.836a.75.75 0 00-1.06-1.061l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM3 12a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h2.25A.75.75 0 013 12zM6.106 6.106a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/></svg>
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69a.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-3.51 1.713-6.635 4.398-8.552a.75.75 0 01.818.162z" clip-rule="evenodd" /></svg>
+    </button>
+
+    <nav id="main-nav">
+        <ul>
+            <li><a href="#header-content">Accueil</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#competences">Compétences</a></li>
+            <li><a href="#languages">Langues</a></li>
+            <li><a href="#interests">Centres d'intérêt</a></li>
+            <li><a href="#certifications">Certifications</a></li>
+            <li><a href="#experience-pro">Expérience</a></li>
+            <li><a href="#projets-acad">Projets</a></li>
+            <li><a href="#education">Formation</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <header id="header-content">
+            <div class="header-layout">
+                <div class="header-text">
+                    <h1>Bonjour, je suis <span class="highlight">Yassine Dahbi</span></h1>
+                    <h2>Technicien en Maintenance et Génie Biomédical</h2>
+                    <div class="header-buttons">
+                        <a href="#contact" class="cta-button">Contactez-moi</a>
+                        <button id="play-pause-btn" class="audio-control-btn">▶ Intro</button>
+                    </div>
+                     <audio id="cv-audio" src="assets/audio/cv_intro.mp3" preload="metadata"></audio>
+                </div>
+                <div class="profile-pic-container">
+                    <div class="profile-pic" data-tilt>
+                        <img src="assets/images/profile-pic.jpeg" alt="Photo de profil de Yassine Dahbi" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <section id="contact" class="animated-section">
+            <h2>CONTACT</h2>
+            <div class="contact-grid">
+                <p><strong>Téléphone :</strong> <span class="copyable" title="Cliquez pour copier">0710713772</span></p>
+                <p><strong>Email :</strong> <a href="mailto:Dahbi-YASSINE@outlook.fr"><span class="copyable" title="Cliquez pour copier">Dahbi-YASSINE@outlook.fr</span></a></p>
+            </div>
+            <p><strong>Adresse :</strong> Hay Hassani, Casablanca</p>
+            <p><strong>LinkedIn :</strong> <a href="https://www.linkedin.com/in/yassine-dahbi-142302268/" target="_blank">/yassine-dahbi-142302268/</a></p>
+            <a href="assets/documents/Cv_Yassine_Dahbi.pdf" download="Cv_Yassine_Dahbi.pdf" class="download-btn">Télécharger mon CV (PDF)</a>
+            <div id="copy-tooltip">Copié !</div>
+        </section>
+
+        <section id="competences" class="animated-section">
+            <h2>COMPÉTENCES</h2>
+            <div class="skill-category">
+                <h3>Compétences Techniques & Spécifiques</h3>
+                <div class="skills-grid">
+                    <div class="skill-tag">Gestion des risques</div>
+                    <div class="skill-tag">Normes de qualité et sécurité</div>
+                    <div class="skill-tag">Maintenance Préventive</div>
+                    <div class="skill-tag">GMAO (Cworks)</div>
+                    <div class="skill-tag">Laerdal LLEAP Lite</div>
+                    <div class="skill-tag">Calibrations & Tests</div>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Compétences Transversales</h3>
+                <div class="skills-grid">
+                    <div class="skill-tag">Communication</div>
+                    <div class="skill-tag">Travail d'équipe</div>
+                    <div class="skill-tag">Résolution de problèmes</div>
+                    <div class="skill-tag">Documentation technique</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="languages" class="animated-section">
+            <h2>LANGUES</h2>
+            <div class="language-item">
+                <p>Français : B1</p>
+            </div>
+            <div class="language-item">
+                <p>Anglais : A2</p>
+            </div>
+        </section>
+
+        <section id="interests" class="animated-section">
+            <h2>CENTRES D'INTÉRÊT</h2>
+            <div class="interests-grid">
+                <div class="interest-item">Veille technologique biomédicale</div>
+                <div class="interest-item">Lecture (technique, dév. personnel)</div>
+                <div class="interest-item">Sport</div>
+            </div>
+        </section>
+
+        <section id="certifications" class="animated-section">
+            <h2>CERTIFICATIONS</h2>
+            <div class="certification-item">
+                <h3>Respirateur de réanimation: Servo-air/n</h3>
+                <p>Formation sur la maintenance des respirateurs de réanimation.</p>
+                <button class="accordion-toggle">Voir le certificat <span class="arrow">▼</span></button>
+                <div class="accordion-content">
+                    <img src="assets/certificates/respirateur-reanimation-certificate.png" alt="Certificat Respirateur Réanimation" class="certificate-img" loading="lazy">
+                </div>
+            </div>
+            <div class="certification-item">
+                <h3>Respirateur d'anesthésie : Flow-c/i</h3>
+                <p>Compétence sur les respirateurs d'anesthésie.</p>
+                <button class="accordion-toggle">Voir le certificat <span class="arrow">▼</span></button>
+                <div class="accordion-content">
+                    <img src="assets/certificates/respirateur-anesthesie-certificate.png" alt="Certificat Respirateur Anesthésie" class="certificate-img" loading="lazy">
+                </div>
+            </div>
+            <div class="certification-item">
+                <h3>Bistouri électrique : ESG-400</h3>
+                <p>Formation sur l'unité chirurgicale avancée ESG-400.</p>
+                <button class="accordion-toggle">Voir le certificat <span class="arrow">▼</span></button>
+                <div class="accordion-content">
+                    <img src="assets/certificates/esg-400-certificate.png" alt="Certificat ESG-400" class="certificate-img" loading="lazy">
+                </div>
+            </div>
+            <div class="certification-item">
+                <h3>Échographie : ACUSON Maple™</h3>
+                <p>Certificat de formation sur le système d'échographie ACUSON Maple™.</p>
+                <button class="accordion-toggle">Voir le certificat <span class="arrow">▼</span></button>
+                <div class="accordion-content">
+                    <img src="assets/certificates/acuson-maple-certificate.png" alt="Certificat ACUSON Maple" class="certificate-img" loading="lazy">
+                </div>
+            </div>
+            <div class="certification-item">
+                <h3>Endoscopie : EVIS EXERA III</h3>
+                <p>Formation sur la colonne d'endoscopie EVIS EXERA III.</p>
+                <button class="accordion-toggle">Voir le certificat <span class="arrow">▼</span></button>
+                <div class="accordion-content">
+                    <img src="assets/certificates/evis-exera-iii-certificate.png" alt="Certificat EVIS EXERA III" class="certificate-img" loading="lazy">
+                </div>
+            </div>
+        </section>
+        
+        <section id="experience-pro" class="animated-section">
+            <h2>EXPÉRIENCES PROFESSIONNELLES</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Stage PFE</h3>
+                        <p><img src="assets/images/logo-hpic.png" alt="Logo HPIC" class="company-logo" loading="lazy"> HPIC Casablanca</p>
+                        <span class="timeline-date">Avril 2025 – Juin 2025</span>
+                        <ul>
+                            <li>Maintenance préventive et corrective sur un large parc d'équipements.</li>
+                            <li>Installation et mise en service de nouveaux dispositifs.</li>
+                            <li>Participation à une caravane médicale.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Stage technique</h3>
+                        <p><img src="assets/images/logo-hpic.png" alt="Logo HPIC" class="company-logo" loading="lazy"> HPIC Casablanca</p>
+                        <span class="timeline-date">Juin 2024 – Août 2024</span>
+                        <ul>
+                            <li>Calibration et dépannage de dispositifs variés.</li>
+                            <li>Rédaction de rapports techniques et gestion d'inventaire.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Stage d'observation</h3>
+                        <p><img src="assets/images/logo-chu-ibn-rochd.png" alt="Logo CHU Ibn Rochd" class="company-logo" loading="lazy"> CHU Ibn Rochd</p>
+                        <span class="timeline-date">Juillet 2023 – Août 2023</span>
+                        <ul>
+                            <li>Observation des processus de maintenance en milieu hospitalier.</li>
+                            <li>Assistance du personnel dans la vérification des équipements.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projets-acad" class="animated-section">
+            <h2>PROJETS ACADÉMIQUES</h2>
+            <div class="project-item">
+                <h3>Développer l'Autonomie Technique : Conception d'outils de test et automatisation des procédures à l'HPIC</h3>
+                <p>Ce projet de fin d'études a visé à structurer et fiabiliser le service biomédical de l'Hôpital Privé International de Casablanca. Mes réalisations clés incluent :
+<ul>
+    <li><strong>Conception et réalisation d'outils de test "low-tech"</strong> : Simulateur ECG et testeur de sécurité électrique, permettant une maîtrise des coûts et un renforcement de l'autonomie technique.</li>
+    <li><strong>Standardisation des pratiques de maintenance</strong> : Création de protocoles détaillés et illustrés pour le nettoyage, la maintenance préventive (ventilateurs Getinge Servo-air et Flow-i, moniteurs Nihon Kohden) et la calibration (pousse-seringues Mindray Benfusion SP3).</li>
+    <li><strong>Automatisation de la gestion des rapports d'intervention</strong> : Implémentation d'une solution numérique (Google Forms, Apps Script) pour la génération, la diffusion et l'archivage automatisés des rapports PDF, garantissant une traçabilité complète et immédiate.</li>
+</ul>
+Ce projet a permis d'améliorer la sécurité des patients, la réactivité du service, et de transformer des pratiques empiriques en un système robuste, sécurisé et traçable.</p>
+            </div>
+            <div class="project-item">
+                <h3>Système de mesure du niveau d'une poche de perfusion</h3>
+                <p>Développement d'un système basé sur Arduino pour mesurer et afficher le niveau de remplissage d'une poche de perfusion, optimisant la surveillance en temps réel.</p>
+            </div>
+            <div class="project-item">
+                <h3>Moniteur ECG basé sur la carte Arduino</h3>
+                <p>Conception et réalisation d'un moniteur électrocardiogramme (ECG) utilisant une carte Arduino, permettant l'acquisition et la visualisation des signaux cardiaques.</p>
+            </div>
+            <div class="project-item">
+                <h3>Prototypage testeur ECG</h3>
+                <p>Création d'un prototype de testeur pour vérifier le bon fonctionnement des appareils ECG, assurant la fiabilité des diagnostics.</p>
+            </div>
+        </section>
+
+        <section id="education" class="animated-section">
+            <h2>FORMATION</h2>
+            <div class="education-item">
+                <h3>Licence en Maintenance et Génie Biomédical</h3>
+                <p>ESM6ISS – Casablanca, Maroc</p>
+                <span class="education-date">2022-2025</span>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2025 Yassine Dahbi. Tous droits réservés.</p>
+    </footer>
+
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js"></script>
+    <script src="script.js"></script>
+    <a href="#" id="scroll-to-top" title="Remonter en haut">&#8679;</a>
+
+</body>
+</html>
