@@ -697,3 +697,9 @@ header#header-content {
     font-size: 0.95rem;
     line-height: 1.5;
 }
+
+.header-intro {
+    font-size: 1.1rem;
+    margin-top: 1.5rem;
+    max-width: 600px;
+}

@@ -1,76 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- GESTION DU PRÉ-CHARGEUR ET DE L'ÉCRAN D'ACCUEIL ---
+    // --- GESTION DU PRÉ-CHARGEUR ---
     const preloader = document.getElementById('preloader');
-    const welcomeScreen = document.getElementById('welcome-screen');
-    const welcomeForm = document.getElementById('welcome-form');
-    const formMessage = document.getElementById('form-message'); // Corrigé : utilise le bon ID
 
     // Cacher le pré-chargeur une fois la page totalement chargée
     window.addEventListener('load', () => {
         if (preloader) preloader.style.display = 'none';
+        document.body.style.overflow = 'auto'; // Permettre le défilement
     });
-
-    // Fonction pour masquer l'écran d'accueil et afficher le site
-    function enterSite() {
-        if (welcomeScreen) {
-            welcomeScreen.style.transition = 'opacity 0.5s ease';
-            welcomeScreen.style.opacity = '0';
-            setTimeout(() => {
-                welcomeScreen.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }, 500);
-        }
-    }
-
-    // Gestion de la soumission du formulaire d'accueil avec AJAX
-    if (welcomeForm) {
-        welcomeForm.addEventListener('submit', async (event) => {
-            event.preventDefault(); // Empêche la redirection
-            
-            const form = event.target;
-            const data = new FormData(form);
-            
-            if (formMessage) {
-                formMessage.textContent = 'Envoi en cours...';
-                formMessage.className = 'form-message';
-            }
-
-            try {
-                const response = await fetch(form.action, {
-                    method: form.method,
-                    body: data,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-
-                if (response.ok) {
-                    if (formMessage) {
-                        formMessage.textContent = "Merci ! L'aventure commence...";
-                        formMessage.classList.add('success');
-                    }
-                    setTimeout(enterSite, 700);
-                } else {
-                    const responseData = await response.json();
-                    if (responseData.hasOwnProperty('errors')) {
-                        if (formMessage) formMessage.textContent = responseData.errors.map(error => error.message).join(", ");
-                    } else {
-                        if (formMessage) formMessage.textContent = "Oops! Une erreur s'est produite lors de l'envoi.";
-                    }
-                }
-            } catch (error) {
-                console.error('Fetch Error:', error);
-                if (formMessage) {
-                    formMessage.textContent = "Oops! Une erreur réseau s'est produite.";
-                    formMessage.classList.add('error');
-                }
-            }
-        });
-    }
-
-    // Bloquer le défilement tant que l'écran d'accueil est visible
-    document.body.style.overflow = 'hidden';
 
 
     // --- MENU DE NAVIGATION LATÉRAL ---

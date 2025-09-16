@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio de Yassine Dahbi, Technicien en Maintenance et Génie Biomédical. Découvrez mes compétences, projets et expériences dans la maintenance et la sécurité des équipements médicaux.">
     <title>Portfolio | Yassine Dahbi - Technicien Biomédical</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,19 +20,7 @@
 <body>
 
     <div id="preloader"><div class="spinner"></div></div>
-    <div id="welcome-screen">
-        <div class="welcome-content">
-            <h2>BIENVENUE SUR MON PORTFOLIO</h2>
-            <p>Veuillez saisir votre adresse e-mail pour commencer la visite.</p>
-            <form id="welcome-form" action="https://formspree.io/f/xqalwzap" method="POST">
-                <div class="email-input-container">
-                    <input type="email" id="email-input" name="email" placeholder="Votre adresse e-mail" required>
-                    <button type="submit" id="submit-email-btn">Soumettre</button>
-                </div>
-                <p id="form-message" class="form-message"></p>
-            </form>
-        </div>
-    </div>
+    
 
     <button id="menu-toggle" aria-label="Ouvrir le menu">&#9776;</button>
     <button id="theme-toggle" aria-label="Changer de thème">
@@ -59,6 +48,10 @@
                 <div class="header-text">
                     <h1>Bonjour, je suis <span class="highlight">Yassine Dahbi</span></h1>
                     <h2>Technicien en Maintenance et Génie Biomédical</h2>
+                    <!-- Ajout de la phrase d'accroche du CV -->
+                    <p class="header-intro">
+                        Diplômé de l'ESM6ISS (UM6SS), je suis à la recherche d'un poste me permettant de mettre en pratique mes compétences et de contribuer activement à la sécurité et à la performance des équipements médicaux.
+                    </p>
                     <div class="header-buttons">
                         <a href="#contact" class="cta-button">Contactez-moi</a>
                         <button id="play-pause-btn" class="audio-control-btn">▶ Intro</button>
@@ -74,40 +67,43 @@
         </header>
         
         <section id="contact" class="animated-section">
-            <h2>CONTACT</h2>
-            <div class="contact-grid">
-                <p><strong>Téléphone :</strong> <span class="copyable" title="Cliquez pour copier">0710713772</span></p>
-                <p><strong>Email :</strong> <a href="mailto:Dahbi-YASSINE@outlook.fr"><span class="copyable" title="Cliquez pour copier">Dahbi-YASSINE@outlook.fr</span></a></p>
-            </div>
-            <p><strong>Adresse :</strong> Hay Hassani, Casablanca</p>
-            <p><strong>LinkedIn :</strong> <a href="https://www.linkedin.com/in/yassine-dahbi-142302268/" target="_blank">/yassine-dahbi-142302268/</a></p>
-            <a href="assets/documents/Cv_Yassine_Dahbi.pdf" download="Cv_Yassine_Dahbi.pdf" class="download-btn">Télécharger mon CV (PDF)</a>
-            <div id="copy-tooltip">Copié !</div>
-        </section>
+    <h2>CONTACT</h2>
+    <div class="contact-grid">
+        <p><strong>Téléphone :</strong> <span class="copyable" title="Cliquez pour copier">0710713772</span></p>
+        <p><strong>Email :</strong> <a href="mailto:Dahbi-YASSINE@outlook.fr"><span class="copyable" title="Cliquez pour copier">Dahbi-YASSINE@outlook.fr</span></a></p>
+    </div>
+    <p><strong>Adresse :</strong> Hay Hassani, Casablanca</p>
+    <div class="contact-links">
+        <p><strong>LinkedIn :</strong> <a href="https://www.linkedin.com/in/yassine-dahbi-142302268/" target="_blank">linkedin.com/in/yassine-dahbi</a></p>
+        <p><strong>GitHub :</strong> <a href="https://dahbi-web.github.io/yassine-dahbi.github.io/" target="_blank">dahbi-web.github.io</a></p>
+    </div>
+    <a href="assets/documents/Cv_Yassine_Dahbi.pdf" download="Cv_Yassine_Dahbi.pdf" class="download-btn">Télécharger mon CV (PDF)</a>
+    <div id="copy-tooltip">Copié !</div>
+</section>
 
         <section id="competences" class="animated-section">
-            <h2>COMPÉTENCES</h2>
-            <div class="skill-category">
-                <h3>Compétences Techniques & Spécifiques</h3>
-                <div class="skills-grid">
-                    <div class="skill-tag">Gestion des risques</div>
-                    <div class="skill-tag">Normes de qualité et sécurité</div>
-                    <div class="skill-tag">Maintenance Préventive</div>
-                    <div class="skill-tag">GMAO (Cworks)</div>
-                    <div class="skill-tag">Laerdal LLEAP Lite</div>
-                    <div class="skill-tag">Calibrations & Tests</div>
-                </div>
-            </div>
-            <div class="skill-category">
-                <h3>Compétences Transversales</h3>
-                <div class="skills-grid">
-                    <div class="skill-tag">Communication</div>
-                    <div class="skill-tag">Travail d'équipe</div>
-                    <div class="skill-tag">Résolution de problèmes</div>
-                    <div class="skill-tag">Documentation technique</div>
-                </div>
-            </div>
-        </section>
+    <h2>COMPÉTENCES</h2>
+    <div class="skill-category">
+        <h3>Compétences Techniques & Spécifiques</h3>
+        <div class="skills-grid">
+            <div class="skill-tag">Gestion des risques en milieu médical</div>
+            <div class="skill-tag">Normes de qualité et de sécurité</div>
+            <div class="skill-tag">Mise en place de procédures préventives</div>
+            <div class="skill-tag">Lecture et interprétation de la documentation technique</div>
+            <div class="skill-tag">GMAO (Cworks)</div>
+            <div class="skill-tag">Laerdal Simulation Home (LLEAP Lite)</div>
+        </div>
+    </div>
+    <div class="skill-category">
+        <h3>Compétences Transversales</h3>
+        <div class="skills-grid">
+            <div class="skill-tag">Communication efficace</div>
+            <div class="skill-tag">Travail d'équipe</div>
+            <div class="skill-tag">Résolution de problèmes</div>
+            <div class="skill-tag">Organisation et planification</div>
+        </div>
+    </div>
+</section>
 
         <section id="languages" class="animated-section">
             <h2>LANGUES</h2>
@@ -131,7 +127,7 @@
         <section id="certifications" class="animated-section">
             <h2>CERTIFICATIONS</h2>
             <div class="certification-item">
-                <h3>Respirateur de réanimation: Servo-air/n</h3>
+                <h3>Respirateur de réanimation: Servo-air/n Start-up guide</h3>
                 <p>Formation sur la maintenance des respirateurs de réanimation.</p>
                 <button class="accordion-toggle">Voir le certificat <span class="arrow">▼</span></button>
                 <div class="accordion-content">
@@ -139,7 +135,7 @@
                 </div>
             </div>
             <div class="certification-item">
-                <h3>Respirateur d'anesthésie : Flow-c/i</h3>
+                <h3>Respirateur d'anesthésie : Flow-c/i System Overview</h3>
                 <p>Compétence sur les respirateurs d'anesthésie.</p>
                 <button class="accordion-toggle">Voir le certificat <span class="arrow">▼</span></button>
                 <div class="accordion-content">
@@ -147,7 +143,7 @@
                 </div>
             </div>
             <div class="certification-item">
-                <h3>Bistouri électrique : ESG-400</h3>
+                <h3>Bistouri électrique : ESG-400 Diathermy Generator</h3>
                 <p>Formation sur l'unité chirurgicale avancée ESG-400.</p>
                 <button class="accordion-toggle">Voir le certificat <span class="arrow">▼</span></button>
                 <div class="accordion-content">
@@ -155,7 +151,7 @@
                 </div>
             </div>
             <div class="certification-item">
-                <h3>Échographie : ACUSON Maple™</h3>
+                <h3>Échographie : ACUSON Maple™ System Overview Course</h3>
                 <p>Certificat de formation sur le système d'échographie ACUSON Maple™.</p>
                 <button class="accordion-toggle">Voir le certificat <span class="arrow">▼</span></button>
                 <div class="accordion-content">
@@ -175,68 +171,143 @@
         <section id="experience-pro" class="animated-section">
             <h2>EXPÉRIENCES PROFESSIONNELLES</h2>
             <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <h3>Stage PFE</h3>
-                        <p><img src="assets/images/logo-hpic.png" alt="Logo HPIC" class="company-logo" loading="lazy"> HPIC Casablanca</p>
-                        <span class="timeline-date">Avril 2025 – Juin 2025</span>
-                        <ul>
-                            <li>Maintenance préventive et corrective sur un large parc d'équipements.</li>
-                            <li>Installation et mise en service de nouveaux dispositifs.</li>
-                            <li>Participation à une caravane médicale.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <h3>Stage technique</h3>
-                        <p><img src="assets/images/logo-hpic.png" alt="Logo HPIC" class="company-logo" loading="lazy"> HPIC Casablanca</p>
-                        <span class="timeline-date">Juin 2024 – Août 2024</span>
-                        <ul>
-                            <li>Calibration et dépannage de dispositifs variés.</li>
-                            <li>Rédaction de rapports techniques et gestion d'inventaire.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <h3>Stage d'observation</h3>
-                        <p><img src="assets/images/logo-chu-ibn-rochd.png" alt="Logo CHU Ibn Rochd" class="company-logo" loading="lazy"> CHU Ibn Rochd</p>
-                        <span class="timeline-date">Juillet 2023 – Août 2023</span>
-                        <ul>
-                            <li>Observation des processus de maintenance en milieu hospitalier.</li>
-                            <li>Assistance du personnel dans la vérification des équipements.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+    <div class="timeline-item">
+        <div class="timeline-content">
+            <h3>Stage Projet de fin d'études (PFE)</h3>
+            <p><img src="assets/images/logo-hpic.png" alt="Logo HPIC" class="company-logo" loading="lazy"> Hôpital Privé International de Casablanca (HPIC)</p>
+            <span class="timeline-date">Avril 2025 – Juin 2025</span>
+            <ul>
+                <li>Maintenance sur divers dispositifs : amplificateur de brillance, autoclave, lit électrique, hémodialyse, respirateur d'anesthésie.</li>
+                <li>Installation et mise en service d'équipements : Échographie, ECG, etc.</li>
+                <li>Mise en place de procédures préventives et contrôle de sécurité électrique (moniteur multiparamétrique, défibrillateur).</li>
+                <li>Élaboration de protocoles d'entretien et d'utilisation.</li>
+                <li>Participation à une caravane médicale et soutien logistique aux équipes.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="timeline-item">
+        <div class="timeline-content">
+            <h3>Stage technique</h3>
+            <p><img src="assets/images/logo-hpic.png" alt="Logo HPIC" class="company-logo" loading="lazy"> Hôpital Privé International de Casablanca (HPIC)</p>
+            <span class="timeline-date">Juin 2024 – Août 2024</span>
+            <ul>
+                <li>Maintenance, dépannage et calibration : pousse-seringue, moniteur multiparamétrique, respirateur de réanimation, autoclave.</li>
+                <li>Rédaction de rapports techniques détaillés sur les interventions biomédicales.</li>
+                <li>Optimisation de la gestion des équipements via un inventaire structuré.</li>
+                <li>Exploitation de manuels techniques et d'outils de diagnostic pour identifier et corriger les défaillances.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="timeline-item">
+        <div class="timeline-content">
+            <h3>Stage d'observation</h3>
+            <p><img src="assets/images/logo-chu-ibn-rochd.png" alt="Logo CHU Ibn Rochd" class="company-logo" loading="lazy"> CHU Ibn Rochd, Casablanca</p>
+            <span class="timeline-date">Juillet 2023 – Août 2023</span>
+            <ul>
+                <li>Participation à la maintenance préventive et corrective d'équipements : respirateur d'anesthésie, table d'opération, etc.</li>
+                <li>Assistance du personnel médical pour la vérification des dispositifs médicaux et leur bon fonctionnement.</li>
+            </ul>
+        </div>
+    </div>
+</div>
         </section>
 
         <section id="projets-acad" class="animated-section">
-            <h2>PROJETS ACADÉMIQUES</h2>
-            <div class="project-item">
-                <h3>Développer l'Autonomie Technique : Conception d'outils de test et automatisation des procédures à l'HPIC</h3>
-                <p>Ce projet de fin d'études a visé à structurer et fiabiliser le service biomédical de l'Hôpital Privé International de Casablanca. Mes réalisations clés incluent :
-<ul>
-    <li><strong>Conception et réalisation d'outils de test "low-tech"</strong> : Simulateur ECG et testeur de sécurité électrique, permettant une maîtrise des coûts et un renforcement de l'autonomie technique.</li>
-    <li><strong>Standardisation des pratiques de maintenance</strong> : Création de protocoles détaillés et illustrés pour le nettoyage, la maintenance préventive (ventilateurs Getinge Servo-air et Flow-i, moniteurs Nihon Kohden) et la calibration (pousse-seringues Mindray Benfusion SP3).</li>
-    <li><strong>Automatisation de la gestion des rapports d'intervention</strong> : Implémentation d'une solution numérique (Google Forms, Apps Script) pour la génération, la diffusion et l'archivage automatisés des rapports PDF, garantissant une traçabilité complète et immédiate.</li>
-</ul>
-Ce projet a permis d'améliorer la sécurité des patients, la réactivité du service, et de transformer des pratiques empiriques en un système robuste, sécurisé et traçable.</p>
-            </div>
-            <div class="project-item">
-                <h3>Système de mesure du niveau d'une poche de perfusion</h3>
-                <p>Développement d'un système basé sur Arduino pour mesurer et afficher le niveau de remplissage d'une poche de perfusion, optimisant la surveillance en temps réel.</p>
-            </div>
-            <div class="project-item">
-                <h3>Moniteur ECG basé sur la carte Arduino</h3>
-                <p>Conception et réalisation d'un moniteur électrocardiogramme (ECG) utilisant une carte Arduino, permettant l'acquisition et la visualisation des signaux cardiaques.</p>
-            </div>
-            <div class="project-item">
-                <h3>Prototypage testeur ECG</h3>
-                <p>Création d'un prototype de testeur pour vérifier le bon fonctionnement des appareils ECG, assurant la fiabilité des diagnostics.</p>
-            </div>
-        </section>
+    <h2>PROJETS ACADÉMIQUES</h2>
+
+    <!-- Projet de Fin d'Études -->
+    <div class="project-item">
+        <h3>Développer l'Autonomie Technique : Conception et Automatisation à l'HPIC</h3>
+        <p>Mon projet de fin d'études a visé à structurer, fiabiliser et moderniser le service biomédical de l'Hôpital Privé International de Casablanca.</p>
+        <button class="accordion-toggle">Voir les réalisations concrètes <span class="arrow">▼</span></button>
+        <div class="accordion-content">
+            <p style="margin-bottom: 1rem;">Mes réalisations clés incluent :</p>
+            <ul>
+                <li><strong>Standardisation des pratiques de maintenance :</strong> Création de protocoles et fiches techniques détaillés et illustrés pour garantir l'uniformité et la qualité des interventions. Voici quelques exemples :</li>
+            </ul>
+
+            <!-- Image de la Fiche de Nettoyage -->
+            <h4 style="margin-top: 1.5rem;">Exemple 1 : Fiche de Nettoyage (GETINGE Servo-air)</h4>
+            <p>Une fiche visuelle et simple pour standardiser le nettoyage d'un équipement critique.</p>
+            <img src="assets/projects/fiche-nettoyage-getinge.jpg" alt="Fiche de procédure de nettoyage pour ventilateur Getinge Servo-air" class="certificate-img" loading="lazy">
+            
+            <!-- Image de la Procédure de Maintenance -->
+            <h4 style="margin-top: 1.5rem;">Exemple 2 : Procédure de Maintenance Préventive</h4>
+            <p>Document cadre pour la maintenance préventive d'un respirateur de réanimation, définissant les outils, les étapes et les points de contrôle.</p>
+            <img src="assets/projects/procedure-maintenance-resp.jpg" alt="Procédure de maintenance préventive pour respirateur de réanimation" class="certificate-img" loading="lazy">
+
+            <!-- Image du Guide de Calibration -->
+            <h4 style="margin-top: 1.5rem;">Exemple 3 : Guide de Calibration (Mindray Benfusion SP3)</h4>
+            <p>Un guide rapide pour la calibration précise des pousse-seringues, une tâche essentielle pour la sécurité des patients.</p>
+            <img src="assets/projects/guide-calibration-mindray.jpg" alt="Guide rapide de calibration pour pousse-seringue Mindray" class="certificate-img" loading="lazy">
+
+            <!-- Image de la Fiche de Nettoyage Cassette -->
+            <h4 style="margin-top: 1.5rem;">Exemple 4 : Fiche de Nettoyage (Cassette)</h4>
+            <p>Une fiche visuelle pour le nettoyage d'une cassette.</p>
+            <img src="assets/projects/fiche_nettoyage_cassette.jpg" alt="Fiche de Nettoyage Cassette" class="certificate-img" loading="lazy">
+
+            <!-- Image du Guide de Calibration Projet -->
+            <h4 style="margin-top: 1.5rem;">Exemple 5 : Guide de Calibration (Projet)</h4>
+            <p>Un exemple de guide de calibration issu de mes projets.</p>
+            <img src="assets/projects/guide_calibration_projet.jpg" alt="Guide de calibration du projet" class="certificate-img" loading="lazy">
+
+            <!-- Image de la Procédure de Maintenance Préventive -->
+            <h4 style="margin-top: 1.5rem;">Exemple 6 : Procédure de Maintenance Préventive</h4>
+            <p>Un exemple de procédure de maintenance préventive.</p>
+            <img src="assets/projects/procedure_maintenance_preventive.jpg" alt="Procédure de maintenance préventive" class="certificate-img" loading="lazy">
+
+            <!-- Image de Resp Preventive -->
+            <h4 style="margin-top: 1.5rem;">Exemple 7 : Maintenance Préventive Respirateur</h4>
+            <p>Un exemple de document pour la maintenance préventive d'un respirateur.</p>
+            <img src="assets/projects/resp_preventive.jpg" alt="Maintenance préventive respirateur" class="certificate-img" loading="lazy">
+
+            <!-- Image de Resp Reanimation -->
+            <h4 style="margin-top: 1.5rem;">Exemple 8 : Maintenance Réanimation</h4>
+            <p>Un exemple de document pour la maintenance d'un équipement de réanimation.</p>
+            <img src="assets/projects/resp_reanimation.jpg" alt="Maintenance réanimation" class="certificate-img" loading="lazy">
+
+            <!-- Image de Preventive Moniteur -->
+            <h4 style="margin-top: 1.5rem;">Exemple 9 : Maintenance Préventive Moniteur</h4>
+            <p>Un exemple de document pour la maintenance préventive d'un moniteur.</p>
+            <img src="assets/projects/preventive_moniteur.jpg" alt="Maintenance préventive moniteur" class="certificate-img" loading="lazy">
+
+            <!-- Exemple 10 -->
+            <h4 style="margin-top: 1.5rem;">Exemple 10 : Procédure de Maintenance</h4>
+            <p>Un autre exemple de procédure de maintenance préventive.</p>
+            <img src="assets/projects/exemple_10_procedure.jpg" alt="Exemple de procédure de maintenance" class="certificate-img" loading="lazy">
+
+            <!-- Exemple 11 -->
+            <h4 style="margin-top: 1.5rem;">Exemple 11 : Maintenance Préventive Respirateur</h4>
+            <p>Document de maintenance préventive pour un respirateur.</p>
+            <img src="assets/projects/exemple_11_resp_prev.jpg" alt="Exemple de maintenance préventive respirateur" class="certificate-img" loading="lazy">
+
+            
+        </div>
+    </div>
+
+    <!-- Autres projets académiques -->
+    <div class="project-item">
+        <h3>Prototypage de solutions de test et de mesure</h3>
+        <p>Conception et réalisation de plusieurs dispositifs basés sur Arduino pour répondre à des besoins concrets en instrumentation biomédicale.</p>
+        <button class="accordion-toggle">Voir les prototypes <span class="arrow">▼</span></button>
+        <div class="accordion-content">
+            <p>Voici les prototypes réalisés :</p>
+            
+            <h4 style="margin-top: 1.5rem;">1. Testeur ECG</h4>
+            <p>Création d'un prototype de testeur pour vérifier le bon fonctionnement des appareils ECG, assurant la fiabilité des diagnostics.</p>
+            <img src="assets/projects/testeur_ecg.jpg" alt="Photo du prototype de testeur ECG" class="certificate-img" loading="lazy">
+
+            <h4 style="margin-top: 1.5rem;">2. Moniteur ECG</h4>
+            <p>Réalisation d'un moniteur ECG fonctionnel pour l'acquisition et la visualisation des signaux cardiaques.</p>
+            <img src="assets/projects/moniteur_ecg.jpg" alt="Photo du prototype de moniteur ECG" class="certificate-img" loading="lazy">
+
+            <h4 style="margin-top: 1.5rem;">3. Système de mesure pour poche de perfusion</h4>
+            <p>Développement d'un système pour mesurer et afficher le niveau de remplissage, optimisant la surveillance en temps réel.</p>
+            <img src="assets/projects/systeme_perfusion.jpg" alt="Photo du prototype de système de mesure pour poche de perfusion" class="certificate-img" loading="lazy">
+        </div>
+    </div>
+
+</section>
 
         <section id="education" class="animated-section">
             <h2>FORMATION</h2>
