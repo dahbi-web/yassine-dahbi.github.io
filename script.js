@@ -79,11 +79,29 @@ document.addEventListener('DOMContentLoaded', () => {
             button.classList.toggle('active');
 
             if (content.style.maxHeight) {
+                // Si on ferme l'accordéon
                 content.style.maxHeight = null;
                 content.style.marginTop = null;
             } else {
+                // Si on ouvre l'accordéon
                 content.style.marginTop = '1rem';
                 content.style.maxHeight = content.scrollHeight + 'px';
+
+                // **Correction :** On écoute le chargement des images à l'intérieur
+                // pour s'assurer que la hauteur est correcte.
+                const images = content.querySelectorAll('img');
+                images.forEach(img => {
+                    // Si une image n'est pas encore chargée
+                    if (!img.complete) {
+                        img.addEventListener('load', () => {
+                            // On met à jour la hauteur de l'accordéon une fois l'image chargée,
+                            // seulement si l'accordéon est toujours ouvert.
+                            if (content.style.maxHeight !== "0px" && content.style.maxHeight !== null) {
+                                content.style.maxHeight = content.scrollHeight + 'px';
+                            }
+                        }, { once: true }); // L'écouteur ne s'exécute qu'une fois par image
+                    }
+                });
             }
         });
     });
