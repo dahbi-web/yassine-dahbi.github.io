@@ -436,6 +436,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 projectCountBadge.textContent = `${visibleProjects} Réalisation${visibleProjects > 1 ? 's' : ''} Technique${visibleProjects > 1 ? 's' : ''}`;
             }
         }
+        updateProjectCounter();
 
         // --- NOUVEAU : Nuage de Technologies Dynamique ---
         function generateTechCloud() {
@@ -1056,6 +1057,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             </div>
         `).join('');
+
+        // --- DÉBUT DE LA CORRECTION ---
+        // Mettre à jour dynamiquement le badge de comptage pour qu'il soit toujours correct
+        const certificationCountBadge = document.getElementById('certification-count-badge');
+        if (certificationCountBadge) {
+            const count = certifications.length;
+            certificationCountBadge.textContent = `${count} Certification${count > 1 ? 's' : ''}`;
+        }
+        // --- FIN DE LA CORRECTION ---
 
         // Ajout des Event Listeners pour la Lightbox
         const modal = document.getElementById('certification-modal');
