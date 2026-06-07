@@ -1,24 +1,22 @@
 /* --- VARIABLES ET STYLES GLOBAUX --- */
 :root {
-    --primary-color: #007bff;
-    --primary-color-dark: #0056b3;
-    --secondary-color: #767676;
-    --background-light: #f8f9fa;
-    --text-light: #212529;
-    --background-dark: #121212;
-    --text-dark: #e0e0e0;
-    --surface-dark: #1e1e1e;
-    --surface-light: #ffffff;
-    --border-light: #dee2e6;
-    --border-dark: #343a40;
-    --shadow-light: rgba(0, 0, 0, 0.07);
-    --shadow-dark: rgba(0, 0, 0, 0.4);
-    --font-sans: 'Roboto', sans-serif;
-    --font-heading: 'Montserrat', sans-serif;
-    --accent-gradient-start: var(--secondary-color);
-    /* Gris secondaire */
-    --accent-gradient-end: #999999;
-    /* Gris plus clair */
+    --primary-color: #00e5ff; /* Cyan technologique */
+    --primary-color-dark: #00b3cc;
+    --secondary-color: #8892b0; /* Gris bleuté tech */
+    --background-light: #f0f4f8;
+    --text-light: #0f172a;
+    --background-dark: #0b1120; /* Bleu très foncé, presque noir, typique des interfaces tech */
+    --text-dark: #e2e8f0;
+    --surface-dark: rgba(30, 41, 59, 0.6); /* Surface translucide pour glassmorphism */
+    --surface-light: rgba(255, 255, 255, 0.7);
+    --border-light: rgba(0, 0, 0, 0.1);
+    --border-dark: rgba(255, 255, 255, 0.1);
+    --shadow-light: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+    --shadow-dark: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    --font-sans: 'Outfit', sans-serif;
+    --font-heading: 'Rajdhani', sans-serif;
+    --accent-gradient-start: var(--primary-color);
+    --accent-gradient-end: #00ffcc; /* Vert émeraude médical */
 }
 
 [data-theme="light"] {
@@ -27,6 +25,8 @@
     --surface-color: var(--surface-light);
     --border-color: var(--border-light);
     --shadow-color: var(--shadow-light);
+    --accent-gradient-start: var(--primary-color-dark);
+    --accent-gradient-end: #0088aa;
 }
 
 [data-theme="dark"] {
@@ -35,10 +35,8 @@
     --surface-color: var(--surface-dark);
     --border-color: var(--border-dark);
     --shadow-color: var(--shadow-dark);
-    --accent-gradient-start: #FFFFFF;
-    /* Blanc */
-    --accent-gradient-end: #e0e0e0;
-    /* Gris très clair (text-dark) */
+    --accent-gradient-start: #00e5ff;
+    --accent-gradient-end: #00ffcc;
 }
 
 *,
@@ -57,8 +55,35 @@ body {
     font-family: var(--font-sans);
     background-color: var(--bg-color);
     color: var(--text-color);
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color 0.3s, color 0.3s, background-image 0.3s;
     line-height: 1.7;
+    /* Motif de fond tech */
+    background-image: radial-gradient(var(--border-color) 1px, transparent 1px);
+    background-size: 30px 30px;
+}
+
+/* --- AMÉLIORATIONS AUTOMATIQUES --- */
+::selection {
+    background-color: var(--primary-color);
+    color: var(--background-dark);
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color-dark);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
+    box-shadow: 0 0 10px var(--primary-color);
 }
 
 main,
@@ -94,13 +119,13 @@ h2::after {
     content: '';
     display: block;
     width: 80px;
-    /* Slightly wider */
     height: 4px;
-    background: linear-gradient(to right, var(--primary-color), var(--primary-color-dark));
-    /* Subtle gradient */
+    background: linear-gradient(to right, var(--primary-color), var(--accent-gradient-end));
+    /* Gradient cyan -> vert émeraude */
+    box-shadow: 0 0 8px rgba(0, 229, 255, 0.5);
+    /* Lueur néon */
     margin: 0.75rem auto 0;
     border-radius: 2px;
-    /* Rounded corners */
 }
 
 section {
@@ -232,9 +257,12 @@ li {
 }
 
 [data-theme="dark"] .site-header.scrolled {
-    background-color: rgba(30, 30, 30, 0.5);
-    /* Fond sombre semi-transparent */
-    border-bottom: 1px solid var(--border-dark);
+    background-color: rgba(11, 17, 32, 0.75);
+    /* Fond bleu tech sombre semi-transparent */
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(0, 229, 255, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 .site-brand {
@@ -354,12 +382,36 @@ li {
     position: relative;
     overflow: hidden;
     
-    /* --- NOUVEAU : Image de fond Bloc Opératoire --- */
+    /* --- Image de fond Bloc Opératoire avec overlay tech --- */
     background-image: url('https://images.unsplash.com/photo-1516549655169-df83a0774514?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; /* Ajoute un bel effet de parallaxe au défilement */
-    z-index: 1; /* Crée un contexte d'empilement pour que l'image reste bien en fond */
+    background-attachment: fixed;
+    z-index: 1;
+}
+
+/* Overlay sombre pour améliorer la lisibilité du texte sur l'image */
+#header-content::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(11, 17, 32, 0.88) 0%,
+        rgba(11, 17, 32, 0.7) 50%,
+        rgba(0, 180, 200, 0.1) 100%
+    );
+    z-index: 0;
+    pointer-events: none;
+}
+
+[data-theme="light"] #header-content::before {
+    background: linear-gradient(
+        135deg,
+        rgba(240, 244, 248, 0.85) 0%,
+        rgba(240, 244, 248, 0.65) 60%,
+        rgba(0, 180, 200, 0.08) 100%
+    );
 }
 
 .header-layout {
@@ -369,11 +421,10 @@ li {
     gap: 4rem;
     width: 100%;
     max-width: 1100px;
-    /* Aligne la largeur avec les autres sections */
     margin: 0 auto;
-    /* Centre la mise en page */
     padding: 0 2rem;
-    /* Ajoute un espacement latéral constant */
+    position: relative;
+    z-index: 2; /* Au-dessus de l'overlay */
 }
 
 .header-text {
@@ -383,12 +434,12 @@ li {
 
 .header-text h1 {
     font-size: clamp(2.5rem, 5vw, 4rem);
-    /* Taille de police plus grande et adaptative */
     line-height: 1.3;
-    padding-top: 0.2em; /* Empêche le clipping */
+    padding-top: 0.2em;
     font-weight: 800;
-    /* Plus audacieux */
     margin-bottom: 1rem;
+    color: #ffffff; /* Blanc pour contraste maximal sur fond sombre */
+    text-shadow: 0 0 30px rgba(0, 229, 255, 0.2); /* Légère lueur tech */
 }
 
 .header-text .highlight {
@@ -526,16 +577,18 @@ li {
     padding: 14px 32px;
     border-radius: 50px;
     font-weight: 700;
-    color: white;
+    color: var(--text-dark); /* Using dark mode text color for contrast on cyan */
     text-align: center;
     background: linear-gradient(to right, var(--primary-color), var(--primary-color-dark));
-    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
     transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .cta-button:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4);
+    box-shadow: 0 0 25px rgba(0, 229, 255, 0.8), 0 0 50px rgba(0, 229, 255, 0.3);
+    color: white;
 }
 
 .audio-control-btn {
@@ -556,27 +609,27 @@ li {
 @keyframes pulse-cta {
     0% {
         transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7);
+        box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.6);
     }
 
     70% {
         transform: scale(1.05);
-        box-shadow: 0 0 0 10px rgba(0, 123, 255, 0);
+        box-shadow: 0 0 0 12px rgba(0, 229, 255, 0);
     }
 
     100% {
         transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
+        box-shadow: 0 0 0 0 rgba(0, 229, 255, 0);
     }
 }
 
 [data-theme="dark"] .audio-control-btn[download] {
-    background: rgba(0, 123, 255, 0.2);
+    background: rgba(0, 229, 255, 0.12);
 }
 
 .audio-control-btn[download] {
     animation: pulse-cta 2s infinite;
-    background: rgba(0, 123, 255, 0.05);
+    background: rgba(0, 229, 255, 0.05);
     border-color: var(--primary-color);
     color: var(--primary-color);
 }
@@ -584,12 +637,14 @@ li {
 .audio-control-btn:hover {
     border-color: var(--primary-color);
     color: var(--primary-color);
+    box-shadow: 0 0 12px rgba(0, 229, 255, 0.4);
     animation: none;
 }
 
 .audio-control-btn[download]:hover {
     background-color: var(--primary-color);
-    color: white;
+    color: var(--background-dark);
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.6);
 }
 
 .profile-pic-container {
@@ -685,34 +740,41 @@ body.loaded .profile-pic-container {
     padding: 12px 28px;
     border-radius: 50px;
     font-weight: 700;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
     text-align: center;
+    border: 1px solid transparent;
 }
 
 .btn:hover {
     text-decoration: none;
     transform: translateY(-3px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .btn-primary {
     background-color: var(--primary-color);
-    color: white;
+    color: var(--text-dark); /* Ensure contrast */
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .btn-primary:hover {
     background-color: var(--primary-color-dark);
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.6);
+    color: white;
 }
 
 .btn-secondary {
-    background-color: transparent;
+    background-color: rgba(0, 229, 255, 0.05);
     color: var(--primary-color);
     border: 2px solid var(--primary-color);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
 }
 
 .btn-secondary:hover {
     background-color: var(--primary-color);
-    color: white;
+    color: var(--text-dark);
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.5);
 }
 
 /* --- SECTION À PROPOS DE MOI --- */
@@ -815,14 +877,15 @@ body.loaded .profile-pic-container {
 }
 
 [data-theme="dark"] .card {
-    background: rgba(30, 30, 30, 0.6);
-    /* Dark mode glass */
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(15, 25, 50, 0.55);
+    /* Dark mode glass - bleu profond translucide */
+    border: 1px solid rgba(0, 229, 255, 0.15);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px var(--shadow-color);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 229, 255, 0.15);
     border-color: var(--primary-color);
 }
 
@@ -2525,14 +2588,15 @@ body {
     overflow: hidden;
     z-index: 1;
     pointer-events: none;
-    /* Repeating SVG background */
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 100" preserveAspectRatio="none"><path d="M0,50 L200,50 L210,10 L220,90 L230,50 L240,50 L250,50 L500,50" fill="none" stroke="rgba(0,123,255,0.4)" stroke-width="2"/></svg>');
+    /* Repeating SVG background with primary color and drop-shadow glow */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 100" preserveAspectRatio="none"><path d="M0,50 L200,50 L210,10 L220,90 L230,50 L240,50 L250,50 L500,50" fill="none" stroke="rgb(0, 229, 255)" stroke-width="2"/></svg>');
     background-repeat: repeat-x;
     background-size: 500px 100%;
     /* Matches SVG viewBox width */
     animation: ecg-scroll 3s linear infinite;
     mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
     -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    filter: drop-shadow(0 0 8px var(--primary-color));
 }
 
 .ecg-line::before {
@@ -2557,7 +2621,7 @@ body {
     height: 6px;
     background-color: var(--primary-color);
     border-radius: 50%;
-    box-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color);
+    box-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color), 0 0 40px var(--primary-color);
     transform: translateY(-50%);
     opacity: 0;
     animation: ecg-dot-pulse 3s linear infinite;
@@ -4136,9 +4200,10 @@ li {
 
 /* --- ECG BACKGROUND --- */
 .ecg-line {
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 100" preserveAspectRatio="none"><path d="M0,50 L200,50 L210,10 L220,90 L230,50 L240,50 L250,50 L500,50" fill="none" stroke="%232563eb" stroke-width="2" opacity="0.3"/></svg>');
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 100" preserveAspectRatio="none"><path d="M0,50 L200,50 L210,10 L220,90 L230,50 L240,50 L250,50 L500,50" fill="none" stroke="rgb(0, 229, 255)" stroke-width="2" opacity="0.6"/></svg>');
+    filter: drop-shadow(0 0 12px var(--primary-color));
 }
-.ecg-line::after { background-color: var(--primary-color); box-shadow: 0 0 15px var(--primary-color); }
+.ecg-line::after { background-color: var(--primary-color); box-shadow: 0 0 15px var(--primary-color), 0 0 30px var(--primary-color); }
 
 /* --- READ MORE BTN --- */
 .read-more-btn {
@@ -4224,3 +4289,9 @@ li {
 #header-content .header-text .header-intro {
     text-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
 }
+
+/* Typing Effect Styles */
+.typing-role { color: var(--primary-color); font-weight: 700; }
+.typing-cursor { display: inline-block; width: 3px; height: 1.2em; background-color: var(--text-color); margin-left: 5px; vertical-align: middle; animation: blink 1s step-end infinite; }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+

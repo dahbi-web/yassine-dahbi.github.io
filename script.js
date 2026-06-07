@@ -295,35 +295,75 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     /**
-     * Sets up the typing animation for the highlighted name.
+     * Sets up the typing animation: first types the name, then loops through roles.
      */
     function setupTypingAnimation() {
-        const highlightSpan = document.querySelector('.header-text .highlight');
-        if (!highlightSpan) return;
+        const nameSpan = document.querySelector('.typing-name');
+        const nameCursor = document.querySelector('.typing-name-cursor');
+        const roleSpan = document.querySelector('.typing-role');
+        if (!nameSpan || !roleSpan) return;
 
-        const originalText = highlightSpan.textContent;
-        highlightSpan.textContent = '';
+        const name = "Yassine Dahbi";
+        const roles = [
+            "Technicien Biomédical",
+            "Expert en Maintenance",
+            "Passionné par l'Innovation"
+        ];
 
-        const typingSpan = document.createElement('span');
-        typingSpan.classList.add('typed-text');
-        highlightSpan.appendChild(typingSpan);
-
-        typingSpan.classList.add('typing-effect');
-
-        let i = 0;
-        function typeWriter() {
-            if (i < originalText.length) {
-                typingSpan.textContent += originalText.charAt(i);
-                i++;
-                setTimeout(typeWriter, 150);
-            } else {
-                setTimeout(() => {
-                    typingSpan.classList.remove('typing-effect');
-                    typingSpan.style.borderRight = 'none';
-                }, 2000);
+        // --- Step 1: Type the name ---
+        function typeName(callback) {
+            let i = 0;
+            function type() {
+                if (i < name.length) {
+                    nameSpan.textContent = name.substring(0, i + 1);
+                    i++;
+                    setTimeout(type, 120);
+                } else {
+                    // Name fully typed — hide name cursor, start roles after a pause
+                    setTimeout(() => {
+                        if (nameCursor) nameCursor.style.display = 'none';
+                        callback();
+                    }, 600);
+                }
             }
+            setTimeout(type, 400); // Initial delay
         }
-        setTimeout(typeWriter, 1000);
+
+        // --- Step 2: Loop through roles ---
+        function startRoles() {
+            let roleIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+
+            function typeRole() {
+                const currentRole = roles[roleIndex];
+
+                if (isDeleting) {
+                    roleSpan.textContent = currentRole.substring(0, charIndex - 1);
+                    charIndex--;
+                } else {
+                    roleSpan.textContent = currentRole.substring(0, charIndex + 1);
+                    charIndex++;
+                }
+
+                let speed = isDeleting ? 50 : 100;
+
+                if (!isDeleting && charIndex === currentRole.length) {
+                    speed = 2000; // Pause before erasing
+                    isDeleting = true;
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    roleIndex = (roleIndex + 1) % roles.length;
+                    speed = 500; // Pause before next role
+                }
+
+                setTimeout(typeRole, speed);
+            }
+
+            setTimeout(typeRole, 300);
+        }
+
+        typeName(startRoles);
     }
 
     /**
