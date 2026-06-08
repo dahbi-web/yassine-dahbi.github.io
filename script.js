@@ -95,6 +95,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     const elementPosition = targetElement.getBoundingClientRect().top;
                     const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
+                    if (header) header.classList.remove('header-hidden');
+                    window._navScrollUntil = Date.now() + 1200;
+
                     window.scrollTo({
                         top: offsetPosition,
                         behavior: "smooth"
@@ -141,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 1. Set initial state from localStorage
         const currentTheme = localStorage.getItem('theme') || 'light';
-        document.body.setAttribute('data-theme', currentTheme);
+        document.documentElement.setAttribute('data-theme', currentTheme);
         if (currentTheme === 'dark') {
             toggleSwitch.checked = true;
         }
@@ -149,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // 2. Add event listener for changes
         toggleSwitch.addEventListener('change', (e) => {
             const newTheme = e.target.checked ? 'dark' : 'light';
-            document.body.setAttribute('data-theme', newTheme);
+            document.documentElement.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
         });
     }
@@ -1557,11 +1560,14 @@ function setupScrollHideHeader() {
             window.requestAnimationFrame(() => {
                 const currentScrollY = window.scrollY;
 
-                if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                header.classList.toggle('scrolled', currentScrollY > 50);
+
+                const navScrollActive = window._navScrollUntil && Date.now() < window._navScrollUntil;
+                if (!navScrollActive && currentScrollY > lastScrollY && currentScrollY > 100) {
                     // Scrolling DOWN
                     header.classList.add('header-hidden');
                 } else {
-                    // Scrolling UP
+                    // Scrolling UP or nav-initiated scroll
                     header.classList.remove('header-hidden');
                 }
 
