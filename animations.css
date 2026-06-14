@@ -439,3 +439,12 @@
   z-index: 2;
   position: relative;
 }
+
+/* ─── CARD REVEAL au scroll ──────────────────────────────── */
+@keyframes card-slide-in {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: none; }
+}
+.card-revealed {
+  animation: card-slide-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}

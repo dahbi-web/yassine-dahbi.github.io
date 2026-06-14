@@ -210,60 +210,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // ─── SMOOTH REVEAL amélioré pour les certif cards ────────────────────────
-  const certGrid = document.getElementById('certifications-grid');
-  if (certGrid) {
-    const certObs = new IntersectionObserver(entries => {
+  // ─── SMOOTH REVEAL pour les certif + project cards ──────────────────────
+  // Les cartes sont toujours visibles (pas d'opacity:0 initial), elles reçoivent
+  // une animation CSS légère quand elles entrent dans le viewport.
+  function revealCards(gridId) {
+    const grid = document.getElementById(gridId);
+    if (!grid) return;
+
+    const obs = new IntersectionObserver(entries => {
       entries.forEach(e => {
-        if (e.isIntersecting) {
-          const cards = e.target.querySelectorAll('.card');
-          cards.forEach((card, i) => {
-            setTimeout(() => {
-              card.style.opacity = '1';
-              card.style.transform = 'translateY(0)';
-            }, i * 50);
-          });
-          certObs.unobserve(e.target);
+        if (e.isIntersecting && !e.target.classList.contains('card-revealed')) {
+          e.target.classList.add('card-revealed');
+          obs.unobserve(e.target);
         }
       });
-    }, { threshold: 0.05 });
+    }, { threshold: 0 });
 
-    // Set initial state
-    const certCards = certGrid.querySelectorAll('.card');
-    certCards.forEach(card => {
-      card.style.opacity = '0';
-      card.style.transform = 'translateY(20px)';
-      card.style.transition = 'opacity 0.4s ease, transform 0.5s cubic-bezier(0.22,1,0.36,1)';
-    });
-    certObs.observe(certGrid);
+    function observeAll() {
+      grid.querySelectorAll('.card:not(.card-revealed)').forEach(c => obs.observe(c));
+    }
+    observeAll();
+    new MutationObserver(observeAll).observe(grid, { childList: true });
   }
 
-  // ─── SMOOTH REVEAL pour les project cards ────────────────────────────────
-  const projectGrid = document.getElementById('project-grid');
-  if (projectGrid) {
-    const projObs = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          const cards = e.target.querySelectorAll('.card');
-          cards.forEach((card, i) => {
-            setTimeout(() => {
-              card.style.opacity = '1';
-              card.style.transform = 'translateY(0)';
-            }, i * 70);
-          });
-          projObs.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.05 });
-
-    const projCards = projectGrid.querySelectorAll('.card');
-    projCards.forEach(card => {
-      card.style.opacity = '0';
-      card.style.transform = 'translateY(20px)';
-      card.style.transition = 'opacity 0.45s ease, transform 0.5s cubic-bezier(0.22,1,0.36,1), box-shadow 0.35s ease, border-color 0.35s ease';
-    });
-    projObs.observe(projectGrid);
-  }
+  revealCards('certifications-grid');
+  revealCards('project-grid');
 
   // ─── CURSOR CUSTOM (optionnel, subtil) ───────────────────────────────────
   const cursor = document.createElement('div');
