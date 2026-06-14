@@ -80,6 +80,38 @@ document.addEventListener('DOMContentLoaded', () => {
     resizeTimer = setTimeout(buildOrbitIcons, 200);
   });
 
+  // ─── A2 : FLÈCHE REBONDISSANTE dans le hero ──────────────────────────────
+  const headerContent = document.querySelector('#header-content');
+  if (headerContent) {
+    const arrow = document.createElement('div');
+    arrow.id = 'scroll-hint';
+    arrow.innerHTML = '<i class="fas fa-chevron-down"></i>';
+    headerContent.appendChild(arrow);
+
+    // Disparaît au premier scroll
+    const hideArrow = () => {
+      arrow.classList.add('hidden');
+      window.removeEventListener('scroll', hideArrow);
+    };
+    window.addEventListener('scroll', hideArrow, { passive: true });
+  }
+
+  // ─── A3 : STAGGER d'entrée sur les why-cards ─────────────────────────────
+  const whySection = document.getElementById('pourquoi-moi');
+  if (whySection) {
+    const whyObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.querySelectorAll('.why-card').forEach((card, i) => {
+            setTimeout(() => card.classList.add('why-card-visible'), i * 120);
+          });
+          whyObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    whyObs.observe(whySection);
+  }
+
   // ─── EFFET RIPPLE sur les boutons ────────────────────────────────────────
   document.querySelectorAll('.cta-button, .audio-control-btn, .btn-view-project, .filter-btn').forEach(btn => {
     btn.addEventListener('click', function (e) {

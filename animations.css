@@ -459,3 +459,36 @@
   padding-right: 4px;
   animation: blink-cursor 0.75s step-end infinite;
 }
+
+/* ─── A2 : Flèche rebondissante hero ────────────────────── */
+#scroll-hint {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--primary-color, #00e5ff);
+  font-size: 1.5rem;
+  animation: bounce-hint 1.6s ease-in-out infinite;
+  cursor: pointer;
+  z-index: 5;
+  transition: opacity 0.5s ease;
+}
+#scroll-hint.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+@keyframes bounce-hint {
+  0%, 100% { transform: translateX(-50%) translateY(0);    opacity: 0.9; }
+  50%       { transform: translateX(-50%) translateY(10px); opacity: 0.5; }
+}
+
+/* ─── A3 : Stagger why-cards ────────────────────────────── */
+.why-card {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.why-card.why-card-visible {
+  opacity: 1;
+  transform: none;
+}
