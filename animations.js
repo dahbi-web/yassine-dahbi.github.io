@@ -2,21 +2,36 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   // ─── ICÔNES ORBITALES autour de la photo de profil ───────────────────────
-  const profilePicContainer = document.querySelector('.profile-pic-container');
-  if (profilePicContainer) {
-    profilePicContainer.style.position = 'relative';
+  // Injection dans le <header #header-content> pour éviter tout overflow:hidden
+  const orbitIconsData = [
+    { icon: 'fa-stethoscope', delay: '0s',      label: 'Maintenance biomédicale' },
+    { icon: 'fa-microchip',   delay: '-4.67s',  label: 'Électronique & Prototypage' },
+    { icon: 'fa-heartbeat',   delay: '-9.33s',  label: 'Monitorage patient' },
+  ];
 
-    // 3 icônes espacées de 120° — décalage par animation-delay négatif
-    // Durée orbit = 14s → 120° = 14s * (120/360) ≈ 4.67s de décalage
-    const orbitIcons = [
-      { icon: 'fa-stethoscope', delay: '0s',      label: 'Maintenance biomédicale' },
-      { icon: 'fa-microchip',   delay: '-4.67s',  label: 'Électronique & Prototypage' },
-      { icon: 'fa-heartbeat',   delay: '-9.33s',  label: 'Monitorage patient' },
-    ];
+  function buildOrbitIcons() {
+    const profilePic = document.querySelector('.profile-pic');
+    const section    = document.querySelector('#header-content');
+    if (!profilePic || !section) return;
 
-    orbitIcons.forEach(({ icon, delay, label }) => {
+    // Retirer les anciens pivots si on recalcule (resize)
+    section.querySelectorAll('.orbit-pivot').forEach(el => el.remove());
+
+    // S'assurer que la section est un parent de positionnement
+    section.style.position = 'relative';
+
+    const sRect = section.getBoundingClientRect();
+    const pRect = profilePic.getBoundingClientRect();
+
+    // Centre de la photo de profil, relatif à la section
+    const cx = pRect.left + pRect.width  / 2 - sRect.left;
+    const cy = pRect.top  + pRect.height / 2 - sRect.top;
+
+    orbitIconsData.forEach(({ icon, delay, label }) => {
       const pivot = document.createElement('div');
       pivot.className = 'orbit-pivot';
+      pivot.style.top  = cy + 'px';
+      pivot.style.left = cx + 'px';
       pivot.style.animationDelay = delay;
 
       const badge = document.createElement('div');
@@ -27,9 +42,21 @@ document.addEventListener('DOMContentLoaded', () => {
       badge.innerHTML = `<i class="fas ${icon}"></i>`;
 
       pivot.appendChild(badge);
-      profilePicContainer.appendChild(pivot);
+      section.appendChild(pivot);
     });
   }
+
+  // Lancer après le chargement complet (images, polices) pour que les positions soient justes
+  window.addEventListener('load', () => {
+    setTimeout(buildOrbitIcons, 400);
+  });
+
+  // Recalculer si la fenêtre est redimensionnée
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(buildOrbitIcons, 200);
+  });
 
   // ─── EFFET RIPPLE sur les boutons ────────────────────────────────────────
   document.querySelectorAll('.cta-button, .audio-control-btn, .btn-view-project, .filter-btn').forEach(btn => {
