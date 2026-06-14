@@ -492,3 +492,27 @@
   opacity: 1;
   transform: none;
 }
+
+/* ─── B4 : Toast partager ────────────────────────────────── */
+#share-toast {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--primary-color, #00e5ff);
+  color: #000;
+  font-weight: 600;
+  padding: 12px 22px;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 20px rgba(0, 229, 255, 0.4);
+  z-index: 99999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  white-space: nowrap;
+}
+#share-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}

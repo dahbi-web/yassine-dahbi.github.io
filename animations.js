@@ -22,6 +22,47 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('load', () => setTimeout(typeNext, 600));
   }
 
+  // ─── B4 : BOUTON PARTAGER ─────────────────────────────────────────────────
+  const shareBtn = document.getElementById('share-btn');
+  if (shareBtn) {
+    shareBtn.addEventListener('click', async () => {
+      const shareData = {
+        title: 'Yassine Dahbi — Technicien Biomédical',
+        text: 'Découvrez le portfolio de Yassine Dahbi, Technicien en Maintenance et Génie Biomédical.',
+        url: window.location.href,
+      };
+
+      if (navigator.share) {
+        // Mobile : partage natif (WhatsApp, LinkedIn, SMS…)
+        try {
+          await navigator.share(shareData);
+        } catch (e) { /* annulé par l'utilisateur */ }
+      } else {
+        // Desktop : copie du lien dans le presse-papiers
+        try {
+          await navigator.clipboard.writeText(shareData.url);
+          showShareToast('Lien copié dans le presse-papiers !');
+        } catch (e) {
+          // Fallback si clipboard refusé
+          showShareToast('Lien : ' + shareData.url, true);
+        }
+      }
+    });
+  }
+
+  function showShareToast(msg, isLink = false) {
+    let toast = document.getElementById('share-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'share-toast';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = isLink ? msg : '🔗 ' + msg;
+    toast.classList.add('show');
+    clearTimeout(toast._timer);
+    toast._timer = setTimeout(() => toast.classList.remove('show'), 2800);
+  }
+
   // ─── ICÔNES ORBITALES autour de la photo de profil ───────────────────────
   // Injection dans le <header #header-content> pour éviter tout overflow:hidden
   const orbitIconsData = [
