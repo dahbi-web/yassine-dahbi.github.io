@@ -12,15 +12,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function typeNext() {
       if (i < fullText.length) {
         highlightEl.textContent += fullText[i++];
-        setTimeout(typeNext, 90);
+        setTimeout(typeNext, 55);
       } else {
-        // Curseur clignote 2s puis disparaît
-        setTimeout(() => highlightEl.classList.remove('typewriter-cursor'), 2200);
+        setTimeout(() => highlightEl.classList.remove('typewriter-cursor'), 1200);
       }
     }
 
-    // Démarrer après le preloader (~1s)
-    window.addEventListener('load', () => setTimeout(typeNext, 1000));
+    // Démarrer après le preloader (~600ms)
+    window.addEventListener('load', () => setTimeout(typeNext, 600));
   }
 
   // ─── ICÔNES ORBITALES autour de la photo de profil ───────────────────────
