@@ -11,6 +11,81 @@
   }
 }
 
+/* ─── ORBIT ICONS ───────────────────────────────────────────── */
+
+/* Rayon d'orbite selon la taille d'écran */
+:root {
+  --orbit-r: 185px;
+}
+@media (max-width: 900px) { :root { --orbit-r: 160px; } }
+@media (max-width: 600px) { :root { --orbit-r: 130px; } }
+@media (max-width: 420px) { :root { --orbit-r: 110px; } }
+
+/* Pivot = point central qui tourne, sans taille propre */
+.orbit-pivot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  z-index: 10;
+  animation: orbit-spin 14s linear infinite;
+  pointer-events: none;
+}
+
+/* Badge icône positionné à la distance R du pivot */
+.orbit-badge {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  top: -24px;                     /* centré verticalement sur le pivot */
+  left: var(--orbit-r);           /* distance du centre de la photo */
+  border-radius: 14px;
+  background: linear-gradient(135deg, #00e5ff, #00ffcc);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  font-size: 1.2rem;
+  font-weight: 700;
+  box-shadow: 0 4px 20px rgba(0, 229, 255, 0.45),
+              0 0 0 2px rgba(0, 229, 255, 0.2);
+  /* Counter-rotation pour que l'icône reste droite */
+  animation: orbit-counter 14s linear infinite;
+  pointer-events: auto;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.orbit-badge:hover {
+  box-shadow: 0 6px 28px rgba(0, 229, 255, 0.7),
+              0 0 0 3px rgba(0, 229, 255, 0.4) !important;
+  transform: scale(1.18) !important;
+}
+
+/* Petite étiquette tooltip au hover */
+.orbit-badge::after {
+  content: attr(data-label);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(10, 14, 26, 0.95);
+  color: #00e5ff;
+  font-size: 0.72rem;
+  font-weight: 600;
+  white-space: nowrap;
+  padding: 4px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 229, 255, 0.2);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.orbit-badge:hover::after { opacity: 1; }
+
+@keyframes orbit-spin    { to { transform: rotate(360deg); } }
+@keyframes orbit-counter { to { transform: rotate(-360deg); } }
+
 /* ─── KEYFRAMES ─────────────────────────────────────────────── */
 
 @keyframes float-profile {

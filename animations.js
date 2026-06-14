@@ -1,6 +1,36 @@
 /* animations.js — améliorations d'animations complémentaires */
 document.addEventListener('DOMContentLoaded', () => {
 
+  // ─── ICÔNES ORBITALES autour de la photo de profil ───────────────────────
+  const profilePicContainer = document.querySelector('.profile-pic-container');
+  if (profilePicContainer) {
+    profilePicContainer.style.position = 'relative';
+
+    // 3 icônes espacées de 120° — décalage par animation-delay négatif
+    // Durée orbit = 14s → 120° = 14s * (120/360) ≈ 4.67s de décalage
+    const orbitIcons = [
+      { icon: 'fa-stethoscope', delay: '0s',      label: 'Maintenance biomédicale' },
+      { icon: 'fa-microchip',   delay: '-4.67s',  label: 'Électronique & Prototypage' },
+      { icon: 'fa-heartbeat',   delay: '-9.33s',  label: 'Monitorage patient' },
+    ];
+
+    orbitIcons.forEach(({ icon, delay, label }) => {
+      const pivot = document.createElement('div');
+      pivot.className = 'orbit-pivot';
+      pivot.style.animationDelay = delay;
+
+      const badge = document.createElement('div');
+      badge.className = 'orbit-badge';
+      badge.setAttribute('data-label', label);
+      badge.title = label;
+      badge.style.animationDelay = delay;
+      badge.innerHTML = `<i class="fas ${icon}"></i>`;
+
+      pivot.appendChild(badge);
+      profilePicContainer.appendChild(pivot);
+    });
+  }
+
   // ─── EFFET RIPPLE sur les boutons ────────────────────────────────────────
   document.querySelectorAll('.cta-button, .audio-control-btn, .btn-view-project, .filter-btn').forEach(btn => {
     btn.addEventListener('click', function (e) {
