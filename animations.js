@@ -1,6 +1,28 @@
 /* animations.js — améliorations d'animations complémentaires */
 document.addEventListener('DOMContentLoaded', () => {
 
+  // ─── TYPEWRITER sur "Yassine Dahbi" ──────────────────────────────────────
+  const highlightEl = document.querySelector('h1 .highlight');
+  if (highlightEl) {
+    const fullText = highlightEl.textContent.replace(/\s+/g, ' ').trim();
+    highlightEl.textContent = '';
+    highlightEl.classList.add('typewriter-cursor');
+
+    let i = 0;
+    function typeNext() {
+      if (i < fullText.length) {
+        highlightEl.textContent += fullText[i++];
+        setTimeout(typeNext, 90);
+      } else {
+        // Curseur clignote 2s puis disparaît
+        setTimeout(() => highlightEl.classList.remove('typewriter-cursor'), 2200);
+      }
+    }
+
+    // Démarrer après le preloader (~1s)
+    window.addEventListener('load', () => setTimeout(typeNext, 1000));
+  }
+
   // ─── ICÔNES ORBITALES autour de la photo de profil ───────────────────────
   // Injection dans le <header #header-content> pour éviter tout overflow:hidden
   const orbitIconsData = [

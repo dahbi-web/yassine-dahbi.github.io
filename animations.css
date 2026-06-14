@@ -448,3 +448,14 @@
 .card-revealed {
   animation: card-slide-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
+
+/* ─── TYPEWRITER cursor sur le nom ──────────────────────── */
+@keyframes blink-cursor {
+  0%, 100% { border-color: transparent; }
+  50%       { border-color: var(--primary-color, #00e5ff); }
+}
+.typewriter-cursor {
+  border-right: 3px solid var(--primary-color, #00e5ff);
+  padding-right: 4px;
+  animation: blink-cursor 0.75s step-end infinite;
+}
