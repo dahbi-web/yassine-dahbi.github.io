@@ -1,0 +1,366 @@
+/* ============================================================
+   ANIMATIONS ENHANCED — couche d'améliorations par-dessus style.min.css
+   ============================================================ */
+
+/* ─── PRÉFÉRENCE MOUVEMENT RÉDUIT ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ─── KEYFRAMES ─────────────────────────────────────────────── */
+
+@keyframes float-profile {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33%       { transform: translateY(-10px) rotate(0.5deg); }
+  66%       { transform: translateY(-5px) rotate(-0.5deg); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(0, 229, 255, 0.25), 0 0 60px rgba(0, 229, 255, 0.08); }
+  50%       { box-shadow: 0 0 35px rgba(0, 229, 255, 0.45), 0 0 90px rgba(0, 229, 255, 0.18); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes pop-in {
+  0%   { opacity: 0; transform: scale(0.7); }
+  70%  { transform: scale(1.05); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes ripple-expand {
+  to { transform: scale(4); opacity: 0; }
+}
+
+@keyframes dot-pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.5); }
+  50%       { transform: scale(1.2); box-shadow: 0 0 0 8px rgba(0, 229, 255, 0); }
+}
+
+@keyframes line-draw {
+  from { height: 0; }
+  to   { height: 100%; }
+}
+
+@keyframes particle-float {
+  0%   { transform: translateY(0px) translateX(0px); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { transform: translateY(-120px) translateX(20px); opacity: 0; }
+}
+
+@keyframes badge-bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
+}
+
+@keyframes count-up-flash {
+  0%   { color: var(--primary-color, #00e5ff); }
+  100% { color: inherit; }
+}
+
+@keyframes underline-slide {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+@keyframes hero-text-in {
+  from { opacity: 0; transform: translateY(24px) skewY(1deg); }
+  to   { opacity: 1; transform: translateY(0) skewY(0deg); }
+}
+
+/* ─── PROFILE PIC AMÉLIORÉ ────────────────────────────────── */
+.profile-pic {
+  animation: float-profile 6s ease-in-out infinite !important;
+}
+
+.profile-pic img {
+  animation: glow-pulse 3s ease-in-out infinite !important;
+}
+
+/* ─── TIMELINE DOTS PULSATION ─────────────────────────────── */
+.timeline-dot {
+  animation: dot-pulse 2.5s ease-in-out infinite !important;
+}
+
+/* ─── TIMELINE LINE DRAW (au scroll) ─────────────────────── */
+.timeline::before {
+  animation: line-draw 1.5s ease-out forwards;
+  animation-play-state: paused;
+}
+.timeline.anim-visible::before {
+  animation-play-state: running;
+}
+
+/* ─── CARTE HOVER — effet de brillance ───────────────────── */
+.card {
+  position: relative;
+  overflow: hidden;
+}
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.06) 50%,
+    transparent 60%
+  );
+  background-size: 200% 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  border-radius: inherit;
+}
+.card:hover::after {
+  opacity: 1;
+  animation: shimmer 0.7s ease forwards;
+}
+
+/* ─── BOUTONS — effet ripple ─────────────────────────────── */
+.cta-button,
+.audio-control-btn,
+.btn-view-project,
+.filter-btn {
+  position: relative;
+  overflow: hidden;
+}
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  margin-top: -30px;
+  margin-left: -30px;
+  background: rgba(255, 255, 255, 0.25);
+  pointer-events: none;
+  animation: ripple-expand 0.6s ease-out forwards;
+}
+
+/* ─── NAVIGATION — underline animée ─────────────────────── */
+#main-nav a {
+  position: relative;
+}
+#main-nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  right: 50%;
+  height: 2px;
+  background: var(--primary-color, #00e5ff);
+  border-radius: 2px;
+  transition: left 0.3s ease, right 0.3s ease;
+}
+#main-nav a:hover::after,
+#main-nav a.active::after {
+  left: 8px;
+  right: 8px;
+}
+
+/* ─── HEADER HERO — animation d'entrée ───────────────────── */
+#header-content.animated-section.visible .header-text h1 {
+  animation: hero-text-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+#header-content.animated-section.visible .header-text h2 {
+  animation: hero-text-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+}
+#header-content.animated-section.visible .tagline {
+  animation: hero-text-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.25s both;
+}
+#header-content.animated-section.visible .header-intro {
+  animation: hero-text-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
+}
+#header-content.animated-section.visible .header-buttons {
+  animation: hero-text-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.45s both;
+}
+
+/* ─── TIMELINE ITEMS — slide alterné ─────────────────────── */
+.timeline-item:nth-child(odd).visible .timeline-content {
+  animation: slide-in-left 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.timeline-item:nth-child(even).visible .timeline-content {
+  animation: slide-in-right 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ─── SKILL ITEMS — pop-in avec stagger ──────────────────── */
+.skills-grid .skill-item {
+  opacity: 0;
+  transform: scale(0.7);
+}
+.skills-grid.visible .skill-item {
+  animation: pop-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.skills-grid.visible .skill-item:nth-child(1) { animation-delay: 0.00s; }
+.skills-grid.visible .skill-item:nth-child(2) { animation-delay: 0.06s; }
+.skills-grid.visible .skill-item:nth-child(3) { animation-delay: 0.12s; }
+.skills-grid.visible .skill-item:nth-child(4) { animation-delay: 0.18s; }
+.skills-grid.visible .skill-item:nth-child(5) { animation-delay: 0.24s; }
+.skills-grid.visible .skill-item:nth-child(6) { animation-delay: 0.30s; }
+.skills-grid.visible .skill-item:nth-child(7) { animation-delay: 0.36s; }
+.skills-grid.visible .skill-item:nth-child(8) { animation-delay: 0.42s; }
+.skills-grid.visible .skill-item:nth-child(9) { animation-delay: 0.48s; }
+.skills-grid.visible .skill-item:nth-child(10){ animation-delay: 0.54s; }
+
+/* ─── CARDS GRID — stagger d'apparition ──────────────────── */
+.card-grid .card,
+.certifications-grid .card,
+.project-grid .card {
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.35s ease, border-color 0.35s ease !important;
+}
+
+/* ─── PROJET CARDS — image zoom amélioré ─────────────────── */
+.project-card .project-image-link img {
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+.project-card:hover .project-image-link img {
+  transform: scale(1.08) !important;
+}
+
+/* ─── CERTIFICATION CARDS — border glow ──────────────────── */
+.certifications-grid .card {
+  transition: box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.4s ease !important;
+}
+.certifications-grid .card:hover {
+  box-shadow: 0 0 0 1px var(--primary-color, #00e5ff),
+              0 12px 40px rgba(0, 229, 255, 0.18) !important;
+  transform: translateY(-6px) !important;
+}
+
+/* ─── BOUTON CTA — pulse amélioré ────────────────────────── */
+@keyframes cta-pulse-enhanced {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.4); }
+  50%       { box-shadow: 0 0 0 10px rgba(0, 229, 255, 0); }
+}
+.cta-button {
+  animation: cta-pulse-enhanced 2.5s ease-in-out infinite !important;
+}
+
+/* ─── SKILL TAGS — hover float ───────────────────────────── */
+.skills-tags span {
+  transition: transform 0.2s ease, background-color 0.2s ease !important;
+  display: inline-block;
+}
+.skills-tags span:hover {
+  transform: translateY(-2px) !important;
+}
+
+/* ─── PARTICULES HERO ─────────────────────────────────────── */
+.hero-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+.hero-particles span {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--primary-color, #00e5ff);
+  opacity: 0;
+  animation: particle-float linear infinite;
+}
+
+/* ─── NUMÉROS ANIMÉS ──────────────────────────────────────── */
+.animated-number {
+  display: inline-block;
+  transition: color 0.4s ease;
+}
+.animated-number.counting {
+  animation: count-up-flash 0.3s ease;
+}
+
+/* ─── HIGHLIGHTS BANNER — scroll ticker ──────────────────── */
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.highlights-banner-inner {
+  display: flex;
+  gap: 2rem;
+  animation: ticker-scroll 18s linear infinite;
+  white-space: nowrap;
+}
+.highlights-banner:hover .highlights-banner-inner {
+  animation-play-state: paused;
+}
+
+/* ─── BADGES "NOUVEAU" — badge animé ─────────────────────── */
+.new-badge-anim {
+  animation: badge-bounce 2s ease-in-out infinite;
+  display: inline-block;
+}
+
+/* ─── BOUTON SCROLL-TO-TOP — spin au hover ───────────────── */
+#scroll-to-top {
+  transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease !important;
+}
+#scroll-to-top:hover {
+  transform: scale(1.15) rotate(-10deg) !important;
+}
+
+/* ─── SECTION TITLES — underline animée ──────────────────── */
+.animated-section.visible h2::after {
+  animation: underline-slide 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+  transform-origin: left;
+}
+
+/* ─── RECOMMANDATION CARDS — entrée en fondu ─────────────── */
+.recommendation-card {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.4s ease !important;
+}
+.recommendation-card:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* ─── WHY CARDS — icône spin ─────────────────────────────── */
+.why-card:hover .why-icon {
+  animation: spin-once 0.5s ease forwards;
+}
+@keyframes spin-once {
+  to { transform: rotate(360deg); }
+}
+
+/* ─── LOGO ENTREPRISE — hover glow ───────────────────────── */
+.company-logo-abs {
+  transition: filter 0.3s ease, transform 0.3s ease !important;
+}
+.has-logo:hover .company-logo-abs {
+  filter: drop-shadow(0 0 8px rgba(0, 229, 255, 0.5)) !important;
+  transform: scale(1.05) !important;
+}
+
+/* ─── IMAGE GALERIE MODALE — zoom ────────────────────────── */
+.project-gallery img {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1) !important;
+  cursor: zoom-in;
+}
+.project-gallery img:hover {
+  transform: scale(1.04) !important;
+  z-index: 2;
+  position: relative;
+}
