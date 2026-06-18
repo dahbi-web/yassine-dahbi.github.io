@@ -555,3 +555,9 @@
 .recommender-name-link:hover .fa-linkedin {
   transform: scale(1.2);
 }
+
+/* ─── MENU TOGGLE : icônes fa-bars / fa-times ────────────────────────────── */
+#menu-toggle .fa-bars  { display: inline-block; }
+#menu-toggle .fa-times { display: none; }
+#menu-toggle.is-open .fa-bars  { display: none; }
+#menu-toggle.is-open .fa-times { display: inline-block; }
