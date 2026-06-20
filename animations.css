@@ -561,3 +561,17 @@
 #menu-toggle .fa-times { display: none; }
 #menu-toggle.is-open .fa-bars  { display: none; }
 #menu-toggle.is-open .fa-times { display: inline-block; }
+
+/* ─── MOBILE : évite chevauchement chatbot / toast / scroll-to-top ───────── */
+@media (max-width: 480px) {
+  /* Scroll-to-top passe à gauche — chatbot occupe la droite */
+  #scroll-to-top {
+    right: auto;
+    left: 1rem;
+  }
+
+  /* Toast monte au-dessus du bouton chatbot (56px + 16px offset + 8px marge) */
+  .toast {
+    bottom: 5rem;
+  }
+}
