@@ -1,7 +1,6 @@
 /* chatbot.js — Assistant Gemini pour le portfolio de Yassine Dahbi */
 
-// ⚠️  Remplace cette valeur par ta clé Gemini API (Google AI Studio)
-const GEMINI_API_KEY = 'VOTRE_CLE_GEMINI_ICI';
+const GEMINI_API_KEY = 'AQ.Ab8RN6KFsKV0J5TBVaqvtPVnQF1mMYMT6JT9BQDKzFvK5D2w1Q';
 const GEMINI_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent';
 
 const SYSTEM_PROMPT = `Tu es l'assistant portfolio de Yassine Dahbi, technicien en Maintenance et Génie Biomédical.
