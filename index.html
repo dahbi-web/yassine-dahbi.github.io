@@ -40,6 +40,7 @@
     </noscript>
     <link rel="stylesheet" href="style.min.css">
     <link rel="stylesheet" href="animations.css">
+    <link rel="stylesheet" href="chatbot.css">
 
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
@@ -1060,8 +1061,37 @@
 
     <a href="#" id="scroll-to-top" aria-label="Remonter en haut">↑</a>
 
+    <!-- CHATBOT GEMINI -->
+    <div id="chatbot-widget">
+        <button id="chatbot-toggle" aria-label="Ouvrir l'assistant portfolio">
+            <i class="fas fa-comments"></i>
+            <span class="chatbot-notif" aria-hidden="true">1</span>
+        </button>
+        <div id="chatbot-panel" aria-hidden="true" role="dialog" aria-label="Assistant portfolio de Yassine Dahbi">
+            <div id="chatbot-header">
+                <img src="assets/images/profile-pic.webp" alt="Yassine Dahbi" class="chatbot-avatar" loading="lazy">
+                <div>
+                    <strong>Assistant de Yassine</strong>
+                    <span class="chatbot-status">en ligne</span>
+                </div>
+                <button id="chatbot-close" aria-label="Fermer l'assistant"><i class="fas fa-times"></i></button>
+            </div>
+            <div id="chatbot-messages" role="log" aria-live="polite" aria-label="Messages"></div>
+            <div id="chatbot-input-area">
+                <input type="text" id="chatbot-input"
+                    placeholder="Posez une question sur Yassine…"
+                    maxlength="300"
+                    aria-label="Votre message">
+                <button id="chatbot-send" aria-label="Envoyer le message">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script src="script.min.js" defer></script>
     <script src="animations.js" defer></script>
+    <script src="chatbot.js" defer></script>
 </body>
 
 </html>
