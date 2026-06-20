@@ -1,7 +1,7 @@
 /* chatbot.js — Assistant Gemini pour le portfolio de Yassine Dahbi */
 
 const GEMINI_API_KEY = 'AQ.Ab8RN6KFsKV0J5TBVaqvtPVnQF1mMYMT6JT9BQDKzFvK5D2w1Q';
-const GEMINI_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent';
+const GEMINI_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent';
 
 const SYSTEM_PROMPT = `Tu es l'assistant portfolio de Yassine Dahbi, technicien en Maintenance et Génie Biomédical.
 Ton rôle : aider les recruteurs et visiteurs à mieux connaître son profil, ses compétences, ses projets et sa disponibilité.
