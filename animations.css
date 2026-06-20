@@ -582,3 +582,12 @@
     bottom: 5rem;
   }
 }
+
+/* ─── DESKTOP : décale le toast à gauche du bouton chatbot ──────────────── */
+@media (min-width: 769px) {
+  /* chatbot : right 24px + 56px width = 80px occupé. Toast à right 5.5rem (88px)
+     → bord droit du toast à 8px de la zone chatbot, bouton × libre */
+  .toast {
+    right: 5.5rem;
+  }
+}
