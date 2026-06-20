@@ -124,7 +124,7 @@ async function fetchGeminiReply() {
     const body = {
       system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
       contents,
-      generationConfig: { maxOutputTokens: 600, temperature: 0.7 }
+      generationConfig: { maxOutputTokens: 1024, temperature: 0.7 }
     };
 
     const res = await fetch(`${GEMINI_URL}?key=${GEMINI_API_KEY}`, {
