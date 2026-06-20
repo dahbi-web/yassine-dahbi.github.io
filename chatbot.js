@@ -162,9 +162,23 @@ function appendMessage(role, text) {
 
   const bubble = document.createElement('div');
   bubble.className = `chat-bubble ${role}`;
-  bubble.textContent = text;
+  bubble.innerHTML = renderMarkdown(text);
   messages.appendChild(bubble);
   messages.scrollTop = messages.scrollHeight;
+}
+
+// Rendu Markdown minimal et sûr : échappe le HTML d'abord, puis applique
+// **gras**, *italique*, `code` et les retours à la ligne.
+function renderMarkdown(text) {
+  const escaped = text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+  return escaped
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/(^|[^*])\*([^*\n]+?)\*/g, '$1<em>$2</em>')
+    .replace(/`([^`]+?)`/g, '<code>$1</code>')
+    .replace(/\n/g, '<br>');
 }
 
 function showTypingIndicator() {
