@@ -518,6 +518,13 @@
 }
 
 /* ─── RECOMMANDATIONS : institution logo + LinkedIn link ──────────────────── */
+/* align-items: flex-start — photo alignée en haut avec le nom, pas centrée */
+.recommender-info {
+  align-items: flex-start;
+}
+.recommender-linkedin-link {
+  margin-top: 2px;
+}
 .recommender-institution {
   display: flex;
   align-items: center;
