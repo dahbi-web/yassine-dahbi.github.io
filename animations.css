@@ -16,6 +16,8 @@
 /* Rayon d'orbite selon la taille d'écran */
 :root {
   --orbit-r: 185px;
+  --chatbot-clearance:        5.5rem; /* chatbot bottom 24px + height 56px + 8px = 88px */
+  --chatbot-clearance-mobile: 5rem;   /* chatbot bottom 16px + height 56px + 8px = 80px */
 }
 @media (max-width: 900px) { :root { --orbit-r: 160px; } }
 @media (max-width: 600px) { :root { --orbit-r: 130px; } }
@@ -571,32 +573,32 @@
 
 /* ─── MOBILE : évite chevauchement chatbot / toast / scroll-to-top ───────── */
 @media (max-width: 480px) {
-  /* Scroll-to-top passe à gauche — chatbot occupe la droite */
   #scroll-to-top {
     right: auto;
     left: 1rem;
   }
-
-  /* Toast monte au-dessus du bouton chatbot (56px + 16px offset + 8px marge) */
   .toast {
-    bottom: 5rem;
+    bottom: var(--chatbot-clearance-mobile);
+  }
+}
+
+/* ─── TABLETTE : monte le toast au-dessus du chatbot ────────────────────── */
+@media (min-width: 481px) and (max-width: 768px) {
+  .toast {
+    bottom: var(--chatbot-clearance-mobile);
   }
 }
 
 /* ─── TABLETTE + DESKTOP : scroll-to-top au-dessus du chatbot ───────────── */
 @media (min-width: 481px) {
-  /* chatbot: bottom 24px + height 56px = 80px depuis le bas.
-     scroll-to-top à bottom 5.5rem (88px) → 8px au-dessus du chatbot */
   #scroll-to-top {
-    bottom: 5.5rem;
+    bottom: var(--chatbot-clearance);
   }
 }
 
 /* ─── DESKTOP : décale le toast à gauche du bouton chatbot ──────────────── */
 @media (min-width: 769px) {
-  /* chatbot : right 24px + 56px width = 80px occupé. Toast à right 5.5rem (88px)
-     → bord droit du toast à 8px de la zone chatbot, bouton × libre */
   .toast {
-    right: 5.5rem;
+    right: var(--chatbot-clearance);
   }
 }

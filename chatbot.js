@@ -75,15 +75,21 @@ function setupChatbot() {
   toggle.addEventListener('click', () => {
     const isOpen = panel.classList.toggle('open');
     panel.setAttribute('aria-hidden', String(!isOpen));
+    const toast = document.querySelector('.toast');
     if (isOpen) {
       if (notif) notif.classList.add('hidden');
       setTimeout(() => input && input.focus(), 250);
+      if (toast) toast.style.display = 'none';
+    } else {
+      if (toast) toast.style.display = '';
     }
   });
 
   closeBtn.addEventListener('click', () => {
     panel.classList.remove('open');
     panel.setAttribute('aria-hidden', 'true');
+    const toast = document.querySelector('.toast');
+    if (toast) toast.style.display = '';
   });
 
   // Envoi par bouton
@@ -162,7 +168,11 @@ function appendMessage(role, text) {
 
   const bubble = document.createElement('div');
   bubble.className = `chat-bubble ${role}`;
-  bubble.innerHTML = renderMarkdown(text);
+  if (role === 'user') {
+    bubble.textContent = text;
+  } else {
+    bubble.innerHTML = renderMarkdown(text);
+  }
   messages.appendChild(bubble);
   messages.scrollTop = messages.scrollHeight;
 }
@@ -175,7 +185,7 @@ function renderMarkdown(text) {
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;');
   return escaped
-    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*\*(.+?)\*\*/gs, '<strong>$1</strong>')
     .replace(/(^|[^*])\*([^*\n]+?)\*/g, '$1<em>$2</em>')
     .replace(/`([^`]+?)`/g, '<code>$1</code>')
     .replace(/\n/g, '<br>');
