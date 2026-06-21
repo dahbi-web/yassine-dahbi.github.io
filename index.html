@@ -39,7 +39,7 @@
             crossorigin="anonymous" referrerpolicy="no-referrer" />
     </noscript>
     <link rel="stylesheet" href="style.min.css">
-    <link rel="stylesheet" href="animations.css">
+    <link rel="stylesheet" href="animations.css?v=2">
     <link rel="stylesheet" href="chatbot.css?v=5">
 
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
@@ -464,267 +464,178 @@
             </div>
 
             <div class="card-grid project-grid" id="project-grid">
-                <div class="card project-card" data-category="automation">
-                    <a href="#" class="project-image-link">
-                        <img src="assets/projects/Gestion_Automatisée_des_Rapports_de_Maintenance.jpeg"
-                            alt="Schéma illustrant l'automatisation des rapports de maintenance avec Google Forms et Apps Script"
-                            loading="lazy">
-                    </a>
-                    <div class="card-content">
-                        <div class="project-badges">
-                            <span class="badge pfe-badge">PFE</span>
-                            <span class="badge innovation-badge">Innovation</span>
-                        </div>
-                        <h3>Gestion Automatisée des Rapports de Maintenance</h3>
-                        <p>Automatisation des rapports d'intervention via Google Forms & Apps Script.</p>
-                        <div class="skills-tags project-skills-tags">
-                            <span>Google Apps Script</span>
-                            <span>Google Forms</span>
-                            <span>Automatisation</span>
-                            <span>GMAO</span>
-                        </div>
+
+                <div class="card project-card travel-card" data-category="automation">
+                    <img src="assets/projects/Gestion_Automatisée_des_Rapports_de_Maintenance.jpeg"
+                        alt="Schéma illustrant l'automatisation des rapports de maintenance avec Google Forms et Apps Script"
+                        loading="lazy">
+                    <div class="travel-overlay">
+                        <span class="travel-badge-top">PFE · Innovation</span>
+                        <h3 class="travel-title">Gestion Automatisée des Rapports de Maintenance</h3>
+                        <div class="travel-sub">Google Apps Script &nbsp;·&nbsp; GMAO &nbsp;·&nbsp; Automatisation</div>
                         <button class="btn-view-project" data-modal-target="gestion-rapports-modal"
-                            aria-label="Voir le projet Gestion Automatisée des Rapports de Maintenance">Voir le
-                            projet</button>
+                            aria-label="Voir le projet Gestion Automatisée des Rapports de Maintenance">
+                            Voir le projet <span class="travel-arrow">›</span>
+                        </button>
                     </div>
                 </div>
 
-                <div class="card project-card" data-category="prototyping testing">
-                    <a href="#" class="project-image-link">
-                        <img src="assets/projects/testeur_ecg.webp"
-                            alt="Prototype de testeur ECG basé sur Arduino avec écran LCD" loading="lazy">
-                    </a>
-                    <div class="card-content">
-                        <div class="project-badges">
-                            <span class="badge pfe-badge">PFE</span>
-                            <span class="badge prototype-badge">Prototype</span>
-                        </div>
-                        <h3>Testeur ECG</h3>
-                        <p>Création d'un prototype pour vérifier le bon fonctionnement des appareils ECG.</p>
-                        <div class="skills-tags project-skills-tags">
-                            <span>Arduino</span>
-                            <span>Électronique</span>
-                            <span>Prototypage</span>
-                        </div>
+                <div class="card project-card travel-card" data-category="prototyping testing">
+                    <img src="assets/projects/testeur_ecg.webp"
+                        alt="Prototype de testeur ECG basé sur Arduino avec écran LCD" loading="lazy">
+                    <div class="travel-overlay">
+                        <span class="travel-badge-top">PFE · Prototype</span>
+                        <h3 class="travel-title">Testeur ECG</h3>
+                        <div class="travel-sub">Arduino &nbsp;·&nbsp; Électronique &nbsp;·&nbsp; Prototypage</div>
                         <button class="btn-view-project" data-modal-target="testeur-ecg-modal"
-                            aria-label="Voir le projet Testeur ECG">Voir le projet</button>
+                            aria-label="Voir le projet Testeur ECG">
+                            Voir le projet <span class="travel-arrow">›</span>
+                        </button>
                     </div>
                 </div>
 
-                <div class="card project-card" data-category="prototyping">
-                    <a href="#" class="project-image-link">
-                        <img src="assets/projects/moniteur_ecg.webp"
-                            alt="Prototype de moniteur ECG fonctionnel affichant un signal cardiaque" loading="lazy">
-                    </a>
-                    <div class="card-content">
-                        <div class="project-badges">
-                            <span class="badge prototype-badge">Prototype</span>
-                        </div>
-                        <h3>Moniteur ECG</h3>
-                        <p>Réalisation d'un moniteur ECG fonctionnel pour l'acquisition des signaux cardiaques.</p>
-                        <div class="skills-tags project-skills-tags">
-                            <span>Arduino</span>
-                            <span>Électronique</span>
-                            <span>Traitement du signal</span>
-                        </div>
+                <div class="card project-card travel-card" data-category="prototyping">
+                    <img src="assets/projects/moniteur_ecg.webp"
+                        alt="Prototype de moniteur ECG fonctionnel affichant un signal cardiaque" loading="lazy">
+                    <div class="travel-overlay">
+                        <span class="travel-badge-top">Prototype</span>
+                        <h3 class="travel-title">Moniteur ECG</h3>
+                        <div class="travel-sub">Arduino &nbsp;·&nbsp; Électronique &nbsp;·&nbsp; Signal cardiaque</div>
                         <button class="btn-view-project" data-project="moniteur-ecg"
-                            aria-label="Voir le projet Moniteur ECG">Voir le projet</button>
+                            aria-label="Voir le projet Moniteur ECG">
+                            Voir le projet <span class="travel-arrow">›</span>
+                        </button>
                     </div>
                 </div>
 
-                <div class="card project-card" data-category="prototyping">
-                    <a href="#" class="project-image-link">
-                        <img src="assets/projects/systeme_perfusion.webp"
-                            alt="Système de mesure de niveau pour poche de perfusion avec affichage numérique"
-                            loading="lazy">
-                    </a>
-                    <div class="card-content">
-                        <div class="project-badges">
-                            <span class="badge prototype-badge">Prototype</span>
-                        </div>
-                        <h3>Système de mesure pour poche de perfusion</h3>
-                        <p>Développement d'un système pour mesurer et surveiller le niveau de remplissage de poche de
-                            perfusion.</p>
-                        <div class="skills-tags project-skills-tags">
-                            <span>Arduino</span>
-                            <span>Capteurs</span>
-                            <span>Prototypage</span>
-                        </div>
+                <div class="card project-card travel-card" data-category="prototyping">
+                    <img src="assets/projects/systeme_perfusion.webp"
+                        alt="Système de mesure de niveau pour poche de perfusion avec affichage numérique"
+                        loading="lazy">
+                    <div class="travel-overlay">
+                        <span class="travel-badge-top">Prototype</span>
+                        <h3 class="travel-title">Système de mesure pour poche de perfusion</h3>
+                        <div class="travel-sub">Arduino &nbsp;·&nbsp; Capteurs &nbsp;·&nbsp; Prototypage</div>
                         <button class="btn-view-project" data-project="systeme-perfusion"
-                            aria-label="Voir le projet Système de mesure pour poche de perfusion">Voir le
-                            projet</button>
+                            aria-label="Voir le projet Système de mesure pour poche de perfusion">
+                            Voir le projet <span class="travel-arrow">›</span>
+                        </button>
                     </div>
                 </div>
 
-                <div class="card project-card" data-category="testing">
-                    <a href="#" class="project-image-link">
-                        <img src="assets/projects/testeur-alternatif-de-securite-electrique-des-dispositifs-medicaux (2)_page-0001.webp"
-                            alt="Document de présentation du testeur alternatif de sécurité électrique" loading="lazy">
-                    </a>
-                    <div class="card-content">
-                        <div class="project-badges">
-                            <span class="badge innovation-badge">Sécurité</span>
-                        </div>
-                        <h3>Testeur de sécurité électrique</h3>
-                        <p>Création d'un testeur de sécurité électrique pour une maîtrise des coûts.</p>
-                        <div class="skills-tags project-skills-tags">
-                            <span>Sécurité électrique</span>
-                            <span>Normes</span>
-                            <span>Maintenance</span>
-                        </div>
+                <div class="card project-card travel-card" data-category="testing">
+                    <img src="assets/projects/testeur-alternatif-de-securite-electrique-des-dispositifs-medicaux (2)_page-0001.webp"
+                        alt="Document de présentation du testeur alternatif de sécurité électrique" loading="lazy">
+                    <div class="travel-overlay">
+                        <span class="travel-badge-top">Sécurité</span>
+                        <h3 class="travel-title">Testeur de sécurité électrique</h3>
+                        <div class="travel-sub">Sécurité électrique &nbsp;·&nbsp; Normes &nbsp;·&nbsp; Maintenance</div>
                         <button class="btn-view-project" data-project="testeur-securite"
-                            aria-label="Voir le projet Testeur de sécurité électrique">Voir le projet</button>
+                            aria-label="Voir le projet Testeur de sécurité électrique">
+                            Voir le projet <span class="travel-arrow">›</span>
+                        </button>
                     </div>
                 </div>
 
-                <div class="card project-card" data-category="procedure">
-                    <a href="#" class="project-image-link">
-                        <img src="assets/projects/exemple_10_procedure.jpg"
-                            alt="Document PDF de procédure de maintenance préventive pour équipement biomédical"
-                            loading="lazy">
-                    </a>
-                    <div class="card-content">
-                        <div class="project-badges">
-                            <span class="badge innovation-badge">Protocole</span>
-                        </div>
-                        <h3>Procédure de maintenance préventive respirateur réanimation</h3>
-                        <p>Création de protocoles respirateur réanimation servo-air/n/u sans testeur spécifique.</p>
-                        <div class="skills-tags project-skills-tags">
-                            <span>Getinge Servo</span>
-                            <span>Maintenance préventive</span>
-                            <span>Rédaction technique</span>
-                        </div>
+                <div class="card project-card travel-card" data-category="procedure">
+                    <img src="assets/projects/exemple_10_procedure.jpg"
+                        alt="Document PDF de procédure de maintenance préventive pour équipement biomédical"
+                        loading="lazy">
+                    <div class="travel-overlay">
+                        <span class="travel-badge-top">Protocole</span>
+                        <h3 class="travel-title">Procédure de maintenance préventive respirateur réanimation</h3>
+                        <div class="travel-sub">Getinge Servo &nbsp;·&nbsp; Maintenance préventive</div>
                         <button class="btn-view-project" data-project="procedure-maintenance"
-                            aria-label="Voir le projet Procédure de maintenance préventive respirateur réanimation">Voir
-                            le projet</button>
+                            aria-label="Voir le projet Procédure de maintenance préventive respirateur réanimation">
+                            Voir le projet <span class="travel-arrow">›</span>
+                        </button>
                     </div>
                 </div>
 
-                <div class="card project-card" data-category="procedure">
-                    <a href="#" class="project-image-link">
-                        <img src="assets/projects/fiche_nettoyage_cassette.webp"
-                            alt="Fiche de protocole de nettoyage pour cassette de stérilisation" loading="lazy">
-                    </a>
-                    <div class="card-content">
-                        <div class="project-badges">
-                            <span class="badge innovation-badge">Hygiène</span>
-                        </div>
-                        <h3>Protocole de Nettoyage Cassette</h3>
-                        <p>Création de protocoles détaillés et illustrés pour respirateur de réanimation Getinge
-                            Servo-air/n.</p>
-                        <div class="skills-tags project-skills-tags">
-                            <span>Getinge Servo</span>
-                            <span>Hygiène</span>
-                            <span>Procédure</span>
-                        </div>
+                <div class="card project-card travel-card" data-category="procedure">
+                    <img src="assets/projects/fiche_nettoyage_cassette.webp"
+                        alt="Fiche de protocole de nettoyage pour cassette de stérilisation" loading="lazy">
+                    <div class="travel-overlay">
+                        <span class="travel-badge-top">Hygiène</span>
+                        <h3 class="travel-title">Protocole de Nettoyage Cassette</h3>
+                        <div class="travel-sub">Getinge Servo &nbsp;·&nbsp; Hygiène &nbsp;·&nbsp; Procédure</div>
                         <button class="btn-view-project" data-project="nettoyage-cassette"
-                            aria-label="Voir le projet Protocole de Nettoyage Cassette">Voir le projet</button>
+                            aria-label="Voir le projet Protocole de Nettoyage Cassette">
+                            Voir le projet <span class="travel-arrow">›</span>
+                        </button>
                     </div>
                 </div>
 
-                <div class="card project-card" data-category="procedure">
-                    <a href="#" class="project-image-link">
-                        <img src="assets/projects/resp_reanimation.webp"
-                            alt="Guide de maintenance préventive pour ventilateur de réanimation" loading="lazy">
-                    </a>
-                    <div class="card-content">
-                        <h3>Procédure de maintenance préventive et de contrôle de constantes respirateur de réanimation
-                        </h3>
-                        <p>Création de protocoles détaillés et illustrés pour respirateur de réanimation Getinge
-                            Servo-c/air/n/U.</p>
-                        <div class="skills-tags project-skills-tags">
-                            <span>Getinge Servo</span>
-                            <span>Maintenance préventive</span>
-                            <span>Contrôle de constantes</span>
-                        </div>
+                <div class="card project-card travel-card" data-category="procedure">
+                    <img src="assets/projects/resp_reanimation.webp"
+                        alt="Guide de maintenance préventive pour ventilateur de réanimation" loading="lazy">
+                    <div class="travel-overlay">
+                        <span class="travel-badge-top">Procédure</span>
+                        <h3 class="travel-title">Maintenance respirateur de réanimation Getinge Servo</h3>
+                        <div class="travel-sub">Getinge Servo &nbsp;·&nbsp; Maintenance préventive &nbsp;·&nbsp; Contrôle</div>
                         <button class="btn-view-project" data-project="maint-ventilateur-rea"
-                            aria-label="Voir le projet Procédure de maintenance préventive respirateur de réanimation">Voir
-                            le projet</button>
+                            aria-label="Voir le projet Procédure de maintenance préventive respirateur de réanimation">
+                            Voir le projet <span class="travel-arrow">›</span>
+                        </button>
                     </div>
                 </div>
 
-                <div class="card project-card" data-category="procedure">
-                    <a href="#" class="project-image-link">
-                        <img src="assets/projects/maintenance-preventive-anesthesie_page-0004.webp"
-                            alt="Guide de maintenance préventive pour ventilateur d'anesthésie" loading="lazy">
-                    </a>
-                    <div class="card-content">
-                        <h3>Procédure de maintenance préventive et de contrôle de constantes respirateur d'anesthésie
-                        </h3>
-                        <p>Création de protocoles détaillés et illustrés pour respirateur d'anesthésie Getinge
-                            Flow-c/i/e.</p>
-                        <div class="skills-tags project-skills-tags">
-                            <span>Getinge Flow</span>
-                            <span>Anesthésie</span>
-                            <span>Maintenance préventive</span>
-                        </div>
+                <div class="card project-card travel-card" data-category="procedure">
+                    <img src="assets/projects/maintenance-preventive-anesthesie_page-0004.webp"
+                        alt="Guide de maintenance préventive pour ventilateur d'anesthésie" loading="lazy">
+                    <div class="travel-overlay">
+                        <span class="travel-badge-top">Procédure</span>
+                        <h3 class="travel-title">Maintenance respirateur d'anesthésie Getinge Flow</h3>
+                        <div class="travel-sub">Getinge Flow &nbsp;·&nbsp; Anesthésie &nbsp;·&nbsp; Maintenance préventive</div>
                         <button class="btn-view-project" data-project="maint-ventilateur-anesth"
-                            aria-label="Voir le projet Procédure de maintenance préventive respirateur d'anesthésie">Voir
-                            le projet</button>
+                            aria-label="Voir le projet Procédure de maintenance préventive respirateur d'anesthésie">
+                            Voir le projet <span class="travel-arrow">›</span>
+                        </button>
                     </div>
                 </div>
 
-                <div class="card project-card" data-category="procedure">
-                    <a href="#" class="project-image-link">
-                        <img src="assets/projects/guide_calibration_projet.webp"
-                            alt="Guide illustré pour la calibration d'un pousse-seringue" loading="lazy">
-                    </a>
-                    <div class="card-content">
-                        <h3>Guide Calibration Pousse-Seringue</h3>
-                        <p>Création de protocoles détaillés et illustrés pour pousse-seringue Mindray BeneFusion SP3.
-                        </p>
-                        <div class="skills-tags project-skills-tags">
-                            <span>Mindray BeneFusion</span>
-                            <span>Calibration</span>
-                            <span>Maintenance</span>
-                        </div>
+                <div class="card project-card travel-card" data-category="procedure">
+                    <img src="assets/projects/guide_calibration_projet.webp"
+                        alt="Guide illustré pour la calibration d'un pousse-seringue" loading="lazy">
+                    <div class="travel-overlay">
+                        <span class="travel-badge-top">Calibration</span>
+                        <h3 class="travel-title">Guide Calibration Pousse-Seringue Mindray</h3>
+                        <div class="travel-sub">Mindray BeneFusion &nbsp;·&nbsp; Calibration &nbsp;·&nbsp; Maintenance</div>
                         <button class="btn-view-project" data-project="guide-calibration"
-                            aria-label="Voir le projet Guide Calibration Pousse-Seringue">Voir le projet</button>
+                            aria-label="Voir le projet Guide Calibration Pousse-Seringue">
+                            Voir le projet <span class="travel-arrow">›</span>
+                        </button>
                     </div>
                 </div>
 
-                <div class="card project-card" data-category="procedure">
-                    <a href="#" class="project-image-link">
-                        <img src="assets/projects/preventive_moniteur.webp"
-                            alt="Procédure de maintenance préventive pour moniteur patient" loading="lazy">
-                    </a>
-                    <div class="card-content">
-                        <h3>Procédure de maintenance préventive et de contrôle de constantes du moniteur
-                            multiparamétrique</h3>
-                        <p>Création de protocoles détaillés et illustrés pour Moniteur multiparamétrique Nihon Kohden.
-                        </p>
-                        <div class="skills-tags project-skills-tags">
-                            <span>Nihon Kohden</span>
-                            <span>Maintenance préventive</span>
-                            <span>Monitorage</span>
-                        </div>
+                <div class="card project-card travel-card" data-category="procedure">
+                    <img src="assets/projects/preventive_moniteur.webp"
+                        alt="Procédure de maintenance préventive pour moniteur patient" loading="lazy">
+                    <div class="travel-overlay">
+                        <span class="travel-badge-top">Procédure</span>
+                        <h3 class="travel-title">Maintenance moniteur multiparamétrique Nihon Kohden</h3>
+                        <div class="travel-sub">Nihon Kohden &nbsp;·&nbsp; Maintenance préventive &nbsp;·&nbsp; Monitorage</div>
                         <button class="btn-view-project" data-project="maint-moniteur"
-                            aria-label="Voir le projet Procédure de maintenance préventive moniteur multiparamétrique">Voir
-                            le projet</button>
+                            aria-label="Voir le projet Procédure de maintenance préventive moniteur multiparamétrique">
+                            Voir le projet <span class="travel-arrow">›</span>
+                        </button>
                     </div>
                 </div>
 
-                <div class="card project-card" data-category="procedure">
-                    <a href="#" class="project-image-link">
-                        <img src="assets/projects/50be2ad3-e85c-48e6-9c95-1f12777303ea-0005.webp"
-                            alt="Page de garde du guide de maintenance pour pousse-seringue." loading="lazy">
-                    </a>
-                    <div class="card-content">
-                        <div class="project-badges">
-                            <span class="badge innovation-badge">Standard</span>
-                        </div>
-                        <h3>Procédure de maintenance préventive et de contrôle de constantes du pousse-seringue</h3>
-                        <p>Création d'un guide détaillé pour la maintenance pousse-seringue Mindray BeneFusion SP3.</p>
-                        <div class="skills-tags project-skills-tags">
-                            <span>Mindray BeneFusion</span>
-                            <span>Maintenance préventive</span>
-                            <span>Guide technique</span>
-                        </div>
+                <div class="card project-card travel-card" data-category="procedure">
+                    <img src="assets/projects/50be2ad3-e85c-48e6-9c95-1f12777303ea-0005.webp"
+                        alt="Page de garde du guide de maintenance pour pousse-seringue." loading="lazy">
+                    <div class="travel-overlay">
+                        <span class="travel-badge-top">Standard</span>
+                        <h3 class="travel-title">Maintenance pousse-seringue Mindray BeneFusion SP3</h3>
+                        <div class="travel-sub">Mindray BeneFusion &nbsp;·&nbsp; Maintenance préventive &nbsp;·&nbsp; Guide</div>
                         <button class="btn-view-project" data-modal-target="pse-modal"
-                            aria-label="Voir le projet Procédure de maintenance préventive pousse-seringue">Voir le
-                            projet</button>
+                            aria-label="Voir le projet Procédure de maintenance préventive pousse-seringue">
+                            Voir le projet <span class="travel-arrow">›</span>
+                        </button>
                     </div>
                 </div>
+
             </div>
         </section>
 
@@ -1089,7 +1000,7 @@
         </div>
     </div>
 
-    <script src="script.min.js" defer></script>
+    <script src="script.min.js?v=2" defer></script>
     <script src="animations.js" defer></script>
     <script src="chatbot.js?v=6" defer></script>
 </body>
