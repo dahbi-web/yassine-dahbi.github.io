@@ -611,16 +611,15 @@
   position: relative;
   height: 340px;
   overflow: hidden;
-  background: var(--card-bg, #1a1a2e);
 }
 
-/* Image entière (jamais rognée) — direct child pour les projets */
+/* Image plein fond — direct child pour les projets */
 .travel-card > img {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   transition: transform 0.55s ease;
 }
 .travel-card:hover > img { transform: scale(1.1); }
@@ -634,7 +633,7 @@
 .travel-card .certificate-item img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   transition: transform 0.55s ease;
 }
 .travel-card:hover .certificate-item img { transform: scale(1.1) !important; }

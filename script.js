@@ -601,47 +601,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-    /**
-     * Couleur dominante d'une image via canvas (échantillon 40×40).
-     * Images en même origine (assets/) → canvas non « tainted », pas de CORS.
-     */
-    function getCardColor(img) {
-        const c = document.createElement('canvas');
-        const ctx = c.getContext('2d', { willReadFrequently: true });
-        const W = c.width = 40, H = c.height = 40;
-        ctx.drawImage(img, 0, 0, W, H);
-        let data;
-        try { data = ctx.getImageData(0, 0, W, H).data; } catch (e) { return null; }
-        let r = 0, g = 0, b = 0, n = 0, r2 = 0, g2 = 0, b2 = 0, n2 = 0;
-        for (let i = 0; i < data.length; i += 4) {
-            const R = data[i], G = data[i + 1], B = data[i + 2], A = data[i + 3];
-            if (A < 128) continue;
-            r2 += R; g2 += G; b2 += B; n2++;                         // moyenne brute (fallback)
-            const max = Math.max(R, G, B), min = Math.min(R, G, B);
-            if (max > 245 || max < 15 || max - min < 15) continue;   // ignore blanc/noir/gris
-            r += R; g += G; b += B; n++;                             // moyenne des pixels colorés
-        }
-        if (n > 20) return [Math.round(r / n), Math.round(g / n), Math.round(b / n)];
-        if (n2) return [Math.round(r2 / n2), Math.round(g2 / n2), Math.round(b2 / n2)];
-        return null;
-    }
-
-    /**
-     * Applique à chaque .travel-card un fond = couleur dominante de son image.
-     */
-    function applyAdaptiveCardColors() {
-        document.querySelectorAll('.travel-card').forEach(card => {
-            const img = card.querySelector('img');
-            if (!img) return;
-            const run = () => {
-                const col = getCardColor(img);
-                if (col) card.style.setProperty('--card-bg', `rgb(${col[0]}, ${col[1]}, ${col[2]})`);
-            };
-            if (img.complete && img.naturalWidth) run();
-            else img.addEventListener('load', run, { once: true });
-        });
-    }
-
     function generateCertifications() {
         const certificationsGrid = document.querySelector('.certifications-grid');
         if (!certificationsGrid) return;
@@ -1348,7 +1307,6 @@ document.addEventListener('DOMContentLoaded', () => {
     setupScrollHideHeader(); // Initialize auto-hide
     setupRecommendationToast();
     setupReadMore();
-    applyAdaptiveCardColors(); // fond de chaque travel-card = couleur de son image
 
     // --- REVEAL ON SCROLL ANIMATION ---
     const revealObserver = new IntersectionObserver((entries) => {
