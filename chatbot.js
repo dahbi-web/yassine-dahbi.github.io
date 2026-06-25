@@ -1,7 +1,7 @@
 /* chatbot.js — Assistant Gemini pour le portfolio de Yassine Dahbi */
 
 const GEMINI_API_KEY = 'AQ.Ab8RN6KFsKV0J5TBVaqvtPVnQF1mMYMT6JT9BQDKzFvK5D2w1Q';
-const GEMINI_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent';
+const GEMINI_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
 
 const SYSTEM_PROMPT = `Tu es l'assistant portfolio de Yassine Dahbi, technicien en Maintenance et Génie Biomédical.
 Ton rôle : aider les recruteurs et visiteurs à mieux connaître son profil, ses compétences, ses projets et sa disponibilité.
@@ -121,45 +121,71 @@ async function fetchGeminiReply() {
 
   const indicator = showTypingIndicator();
 
-  try {
-    const contents = conversationHistory.map(m => ({
-      role: m.role === 'assistant' ? 'model' : 'user',
-      parts: [{ text: m.text }]
-    }));
+  const contents = conversationHistory.map(m => ({
+    role: m.role === 'assistant' ? 'model' : 'user',
+    parts: [{ text: m.text }]
+  }));
 
-    const body = {
-      system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
-      contents,
-      generationConfig: { maxOutputTokens: 1024, temperature: 0.7 }
-    };
+  const body = {
+    system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
+    contents,
+    generationConfig: { maxOutputTokens: 1024, temperature: 0.7 }
+  };
 
-    const res = await fetch(`${GEMINI_URL}?key=${GEMINI_API_KEY}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
-    });
+  const MAX_RETRIES = 3;
+  let delay = 2000;
 
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+    try {
+      const res = await fetch(`${GEMINI_URL}?key=${GEMINI_API_KEY}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
 
-    const data = await res.json();
-    const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text
-      || 'Désolé, je n\'ai pas pu générer une réponse. Réessayez ou contactez Yassine directement.';
+      if (res.status === 429 || res.status === 503) {
+        if (attempt < MAX_RETRIES) {
+          await new Promise(r => setTimeout(r, delay));
+          delay *= 2;
+          continue;
+        }
+        throw new Error(`HTTP ${res.status}`);
+      }
 
-    removeTypingIndicator(indicator);
-    appendMessage('assistant', reply);
-    conversationHistory.push({ role: 'assistant', text: reply });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
-  } catch (err) {
-    removeTypingIndicator(indicator);
-    appendMessage('assistant', 'Une erreur s\'est produite. Veuillez contacter Yassine directement à Dahbi-YASSINE@outlook.fr.');
-    console.error('Chatbot Gemini error:', err);
-  } finally {
-    isTyping = false;
-    const sendBtn = document.getElementById('chatbot-send');
-    if (sendBtn) sendBtn.disabled = false;
-    const input = document.getElementById('chatbot-input');
-    if (input) input.focus();
+      const data = await res.json();
+      const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text
+        || 'Désolé, je n\'ai pas pu générer une réponse. Réessayez ou contactez Yassine directement.';
+
+      removeTypingIndicator(indicator);
+      appendMessage('assistant', reply);
+      conversationHistory.push({ role: 'assistant', text: reply });
+
+      isTyping = false;
+      const sendBtn = document.getElementById('chatbot-send');
+      if (sendBtn) sendBtn.disabled = false;
+      const input = document.getElementById('chatbot-input');
+      if (input) input.focus();
+      return;
+
+    } catch (err) {
+      if (attempt === MAX_RETRIES) {
+        removeTypingIndicator(indicator);
+        appendMessage('assistant', 'Désolé, le service est temporairement surchargé. Réessayez dans quelques secondes ou contactez Yassine à **Dahbi-YASSINE@outlook.fr**.');
+        console.error('Chatbot Gemini error:', err);
+        break;
+      }
+      await new Promise(r => setTimeout(r, delay));
+      delay *= 2;
+    }
   }
+
+  isTyping = false;
+  const sendBtn = document.getElementById('chatbot-send');
+  if (sendBtn) sendBtn.disabled = false;
+  const input = document.getElementById('chatbot-input');
+  if (input) input.focus();
 }
 
 function appendMessage(role, text) {
