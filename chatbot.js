@@ -1,7 +1,8 @@
-/* chatbot.js — Assistant Gemini pour le portfolio de Yassine Dahbi */
+/* chatbot.js — Assistant Groq (Llama) pour le portfolio de Yassine Dahbi */
 
-const GEMINI_API_KEY = 'AQ.Ab8RN6KFsKV0J5TBVaqvtPVnQF1mMYMT6JT9BQDKzFvK5D2w1Q';
-const GEMINI_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent';
+const GROQ_API_KEY = 'VOTRE_CLE_GROQ_ICI'; // console.groq.com → API Keys → Create API Key
+const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions';
+const GROQ_MODEL = 'llama-3.1-8b-instant';
 
 const SYSTEM_PROMPT = `Tu es l'assistant portfolio de Yassine Dahbi, technicien en Maintenance et Génie Biomédical.
 Ton rôle : aider les recruteurs et visiteurs à mieux connaître son profil, ses compétences, ses projets et sa disponibilité.
@@ -111,25 +112,26 @@ function setupChatbot() {
     appendMessage('user', text);
     conversationHistory.push({ role: 'user', text });
 
-    await fetchGeminiReply();
+    await fetchGroqReply();
   }
 }
 
-async function fetchGeminiReply() {
+async function fetchGroqReply() {
   isTyping = true;
   document.getElementById('chatbot-send').disabled = true;
 
   const indicator = showTypingIndicator();
 
-  const contents = conversationHistory.map(m => ({
-    role: m.role === 'assistant' ? 'model' : 'user',
-    parts: [{ text: m.text }]
-  }));
+  const messages = [
+    { role: 'system', content: SYSTEM_PROMPT },
+    ...conversationHistory.map(m => ({ role: m.role === 'assistant' ? 'assistant' : 'user', content: m.text }))
+  ];
 
   const body = {
-    system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
-    contents,
-    generationConfig: { maxOutputTokens: 1024, temperature: 0.7 }
+    model: GROQ_MODEL,
+    messages,
+    max_tokens: 1024,
+    temperature: 0.7
   };
 
   const MAX_RETRIES = 3;
@@ -137,9 +139,12 @@ async function fetchGeminiReply() {
 
   for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
     try {
-      const res = await fetch(`${GEMINI_URL}?key=${GEMINI_API_KEY}`, {
+      const res = await fetch(GROQ_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${GROQ_API_KEY}`
+        },
         body: JSON.stringify(body)
       });
 
@@ -155,7 +160,7 @@ async function fetchGeminiReply() {
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
       const data = await res.json();
-      const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text
+      const reply = data?.choices?.[0]?.message?.content
         || 'Désolé, je n\'ai pas pu générer une réponse. Réessayez ou contactez Yassine directement.';
 
       removeTypingIndicator(indicator);
@@ -173,7 +178,7 @@ async function fetchGeminiReply() {
       if (attempt === MAX_RETRIES) {
         removeTypingIndicator(indicator);
         appendMessage('assistant', 'Désolé, le service est temporairement surchargé. Réessayez dans quelques secondes ou contactez Yassine à **Dahbi-YASSINE@outlook.fr**.');
-        console.error('Chatbot Gemini error:', err);
+        console.error('Chatbot Groq error:', err);
         break;
       }
       await new Promise(r => setTimeout(r, delay));
