@@ -122,9 +122,12 @@ async function fetchGroqReply() {
 
   const indicator = showTypingIndicator();
 
+  // On n'envoie que les derniers échanges pour limiter les tokens et la latence.
+  const MAX_HISTORY = 10;
+  const recent = conversationHistory.slice(-MAX_HISTORY);
   const messages = [
     { role: 'system', content: SYSTEM_PROMPT },
-    ...conversationHistory.map(m => ({ role: m.role === 'assistant' ? 'assistant' : 'user', content: m.text }))
+    ...recent.map(m => ({ role: m.role === 'assistant' ? 'assistant' : 'user', content: m.text }))
   ];
 
   const body = {
@@ -132,6 +135,19 @@ async function fetchGroqReply() {
     messages,
     max_tokens: 1024,
     temperature: 0.7
+  };
+
+  const finish = () => {
+    isTyping = false;
+    const sendBtn = document.getElementById('chatbot-send');
+    if (sendBtn) sendBtn.disabled = false;
+    const input = document.getElementById('chatbot-input');
+    if (input) input.focus();
+  };
+
+  const showError = () => {
+    removeTypingIndicator(indicator);
+    appendMessage('assistant', 'Désolé, le service est momentanément indisponible. Réessayez dans quelques secondes ou contactez Yassine à **Dahbi-YASSINE@outlook.fr**.');
   };
 
   const MAX_RETRIES = 3;
@@ -148,16 +164,24 @@ async function fetchGroqReply() {
         body: JSON.stringify(body)
       });
 
+      // Erreurs temporaires (quota momentané, service saturé) : on réessaie.
       if (res.status === 429 || res.status === 503) {
         if (attempt < MAX_RETRIES) {
           await new Promise(r => setTimeout(r, delay));
           delay *= 2;
           continue;
         }
-        throw new Error(`HTTP ${res.status}`);
+        showError();
+        console.error('Chatbot Groq error: HTTP', res.status);
+        return finish();
       }
 
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      // Erreurs définitives (clé invalide, requête malformée) : inutile de réessayer.
+      if (!res.ok) {
+        showError();
+        console.error('Chatbot Groq error: HTTP', res.status);
+        return finish();
+      }
 
       const data = await res.json();
       const reply = data?.choices?.[0]?.message?.content
@@ -166,31 +190,21 @@ async function fetchGroqReply() {
       removeTypingIndicator(indicator);
       appendMessage('assistant', reply);
       conversationHistory.push({ role: 'assistant', text: reply });
-
-      isTyping = false;
-      const sendBtn = document.getElementById('chatbot-send');
-      if (sendBtn) sendBtn.disabled = false;
-      const input = document.getElementById('chatbot-input');
-      if (input) input.focus();
-      return;
+      return finish();
 
     } catch (err) {
+      // Erreur réseau : on réessaie, puis on abandonne proprement.
       if (attempt === MAX_RETRIES) {
-        removeTypingIndicator(indicator);
-        appendMessage('assistant', 'Désolé, le service est temporairement surchargé. Réessayez dans quelques secondes ou contactez Yassine à **Dahbi-YASSINE@outlook.fr**.');
+        showError();
         console.error('Chatbot Groq error:', err);
-        break;
+        return finish();
       }
       await new Promise(r => setTimeout(r, delay));
       delay *= 2;
     }
   }
 
-  isTyping = false;
-  const sendBtn = document.getElementById('chatbot-send');
-  if (sendBtn) sendBtn.disabled = false;
-  const input = document.getElementById('chatbot-input');
-  if (input) input.focus();
+  finish();
 }
 
 function appendMessage(role, text) {
