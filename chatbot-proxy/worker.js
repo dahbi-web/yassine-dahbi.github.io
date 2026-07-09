@@ -7,7 +7,7 @@ const ALLOWED_ORIGIN = 'https://dahbi-web.github.io';
 const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions';
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const cors = {
       'Access-Control-Allow-Origin': ALLOWED_ORIGIN,
       'Access-Control-Allow-Methods': 'POST, OPTIONS',
@@ -56,6 +56,26 @@ export default {
 
     // On relaie le code HTTP (429/503 inclus) pour que le retry côté client marche.
     const text = await groqRes.text();
+
+    // Journalisation best-effort : envoie l'échange à un Google Apps Script
+    // qui l'ajoute dans un Google Sheet. N'affecte jamais la réponse au
+    // visiteur et ses erreurs sont ignorées (fire-and-forget).
+    if (groqRes.ok && env.LOG_URL) {
+      try {
+        const data = JSON.parse(text);
+        const answer = data?.choices?.[0]?.message?.content || '';
+        const lastUser = [...body.messages].reverse().find(m => m.role === 'user');
+        const question = lastUser ? lastUser.content : '';
+        ctx.waitUntil(
+          fetch(env.LOG_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ question, answer }),
+          }).catch(() => {})
+        );
+      } catch { /* on ignore toute erreur de journalisation */ }
+    }
+
     return new Response(text, {
       status: groqRes.status,
       headers: { ...cors, 'Content-Type': 'application/json' },
