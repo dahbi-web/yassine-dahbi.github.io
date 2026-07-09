@@ -1,64 +1,58 @@
-# Proxy chatbot — Cloudflare Worker
+# Backend du chatbot — Google Apps Script (unique service, gratuit)
 
-Ce dossier contient le proxy qui garde la clé API Groq **côté serveur**.
-Le navigateur n'appelle que le Worker ; il ne voit jamais la clé.
+Un seul backend, hébergé gratuitement par Google Apps Script, **lié à un Google
+Sheet**. Il garde la clé Groq côté serveur et enregistre les conversations.
 
 ```
-Navigateur (chatbot.js)  ──POST {messages}──►  Worker  ──+clé──►  Groq
-     (aucune clé)                             (secret GROQ_API_KEY)
+Navigateur (chatbot.js)  ──POST {messages}──►  Apps Script  ──+clé──►  Groq
+     (aucune clé)                               │
+                                                └──► Google Sheet (onglet « Logs »)
 ```
 
-## Déploiement (100 % navigateur, gratuit)
+Le fichier `backend.gs` de ce dossier est le code à déployer. `worker.js`
+(version Cloudflare) est conservé pour référence mais **n'est plus utilisé**.
+
+## Déploiement (100 % navigateur)
 
 1. **Nouvelle clé Groq** : `console.groq.com` → *API Keys* → *Create API Key*.
-   Copier la nouvelle clé. **Supprimer l'ancienne** (compromise, présente dans
-   l'historique git public).
+   Copier la nouvelle clé, puis **supprimer l'ancienne** (`gsk_HAnDk...`) qui est
+   compromise (présente dans l'historique git public).
 
-2. **Compte Cloudflare** gratuit : `dash.cloudflare.com`.
+2. **Créer le Google Sheet** : ouvrir `sheets.new` (nouveau classeur vierge).
 
-3. **Créer le Worker** : *Workers & Pages* → *Create* → *Create Worker* →
-   nom `portfolio-chat` → *Deploy* → *Edit code* → coller le contenu de
-   `worker.js` → *Deploy*.
+3. **Coller le code** : dans le Sheet, *Extensions → Apps Script*. Effacer le
+   contenu par défaut, coller tout `backend.gs`, puis *Enregistrer* (💾).
 
-4. **Ajouter le secret** : Worker → *Settings* → *Variables and Secrets* → *Add* :
-   - Nom : `GROQ_API_KEY`
-   - Valeur : la **nouvelle** clé Groq
-   - Type : **Secret / Encrypt**
-   - *Deploy*.
+4. **Enregistrer la clé (privée)** : dans l'éditeur Apps Script, roue dentée
+   *Paramètres du projet* → *Propriétés du script* → *Ajouter une propriété* :
+   - Propriété : `GROQ_API_KEY`
+   - Valeur : votre **nouvelle** clé Groq
+   - *Enregistrer les propriétés du script*.
 
-5. **Copier l'URL** du Worker (`https://portfolio-chat.<sous-domaine>.workers.dev`)
-   et la reporter dans `chatbot.js` (constante `CHAT_API_URL`).
+5. **Déployer** : bouton *Déployer* → *Nouveau déploiement* → engrenage → type
+   *Application Web* :
+   - Description : `chatbot`
+   - Exécuter en tant que : **Moi**
+   - Qui a accès : **Tout le monde**
+   - *Déployer* → autoriser l'accès (choisir votre compte, *Avancé → Accéder au
+     projet*).
+   - **Copier l'URL de l'application Web** (`https://script.google.com/macros/s/…/exec`).
 
-## Journalisation des conversations (Google Sheet)
+6. **Envoyer cette URL** : elle sera placée dans `chatbot.js` (constante
+   `CHAT_API_URL`). Après ça, le chatbot est branché, sécurisé, et journalise.
 
-Le Worker envoie chaque échange (question du visiteur + réponse du bot) à un
-Google Apps Script qui l'ajoute dans un Google Sheet. C'est **best-effort** :
-si le Sheet est indisponible, le chat continue de fonctionner normalement.
+## Vérifier / relire les conversations
 
-1. **Google Sheet** : créer un nouveau Sheet (`sheets.new`).
-2. **Apps Script** : dans le Sheet, *Extensions → Apps Script* → coller le
-   contenu de `logger.gs` → remplacer `CHANGE_ME_jeton_aleatoire` par un jeton
-   aléatoire (ex. `k7Qm2x9`) → *Enregistrer*.
-3. **Déployer** : *Déployer → Nouveau déploiement → Type : Application Web* →
-   « Exécuter en tant que : moi », « Accès : Tout le monde » → *Déployer* →
-   autoriser → **copier l'URL** `https://script.google.com/macros/s/XXX/exec`.
-4. **Composer `LOG_URL`** : coller l'URL puis ajouter `?token=<même jeton>` :
-   `https://script.google.com/macros/s/XXX/exec?token=k7Qm2x9`
-5. **Ajouter au Worker** : Cloudflare → Worker `portfolio-chat` → *Settings →
-   Variables and Secrets → Add* → nom `LOG_URL`, valeur = l'URL composée →
-   *Deploy*.
+Ouvrir le Google Sheet → onglet **Logs** : chaque ligne = `Date | Question |
+Réponse`. Vous pouvez filtrer, trier, exporter comme n'importe quel tableur.
 
-Le jeton empêche que n'importe qui écrive dans votre Sheet. Une ligne
-`Date | Question | Réponse` est ajoutée à chaque conversation.
+## Mettre à jour le profil / prompt
 
-## Mise à jour du prompt / profil
+Le prompt système (profil de Yassine) reste dans `chatbot.js` — facile à éditer,
+aucun redéploiement du script nécessaire.
 
-Le prompt système et les données du profil restent dans `chatbot.js` (facile à
-éditer). Le Worker n'a pas besoin d'être redéployé pour ça — seulement si on
-change la logique du proxy lui-même.
+## Note technique (CORS)
 
-## Origine autorisée (CORS)
-
-`worker.js` limite les appels à `https://dahbi-web.github.io`. Si le domaine du
-site change (domaine personnalisé), mettre à jour `ALLOWED_ORIGIN` puis
-redéployer le Worker.
+`chatbot.js` envoie la requête en `Content-Type: text/plain` : cela évite la
+requête préliminaire (preflight) que Apps Script ne gère pas, tout en
+transmettant bien du JSON dans le corps (lu via `e.postData.contents`).
