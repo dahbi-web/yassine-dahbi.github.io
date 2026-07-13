@@ -394,8 +394,12 @@
 #scroll-to-top {
   transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease !important;
 }
-#scroll-to-top:hover {
-  transform: scale(1.15) rotate(-10deg) !important;
+/* Hover réservé aux appareils avec vrai survol (souris) : évite que le
+   premier appui sur écran tactile déclenche le :hover au lieu du clic. */
+@media (hover: hover) {
+  #scroll-to-top:hover {
+    transform: scale(1.15) rotate(-10deg) !important;
+  }
 }
 
 /* ─── SECTION TITLES — underline animée ──────────────────── */
