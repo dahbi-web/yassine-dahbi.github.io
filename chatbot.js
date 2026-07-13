@@ -1,6 +1,6 @@
 /* chatbot.js — Assistant Groq (Llama) pour le portfolio de Yassine Dahbi */
 
-const GROQ_API_KEY = 'gsk_HAnDkVSYyILYuhDWvf4J' + 'WGdyb3FYaelfR4beKKgX' + 'vgV2ta9vuKw0';
+const GROQ_API_KEY = 'gsk_nHm4bXE5ItpAGlnmwOhA' + 'WGdyb3FYVLNbU9Yo5JMh' + 'ns4DkvqGakVw';
 const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions';
 const GROQ_MODEL = 'llama-3.1-8b-instant';
 
