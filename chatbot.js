@@ -78,6 +78,13 @@ function setupChatbot() {
     panel.setAttribute('aria-hidden', String(!isOpen));
     const toast = document.querySelector('.toast');
     if (isOpen) {
+      // Google Analytics : suit l'ouverture du chatbot par un visiteur
+      if (typeof gtag === 'function') {
+        gtag('event', 'open_chatbot', {
+          'event_category': 'Engagement',
+          'event_label': 'Assistant de Yassine'
+        });
+      }
       if (notif) notif.classList.add('hidden');
       setTimeout(() => input && input.focus(), 250);
       if (toast) toast.style.display = 'none';
