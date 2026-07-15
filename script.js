@@ -114,6 +114,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (sections.length === 0 || navLinks.length === 0) return;
 
+        const trackedSections = new Set(); // n'envoie l'événement qu'une fois par section
+
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -121,6 +123,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     navLinks.forEach(link => {
                         link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
                     });
+                    // Google Analytics : suit le parcours du visiteur section par section
+                    if (!trackedSections.has(id)) {
+                        trackedSections.add(id);
+                        const heading = entry.target.querySelector('h2');
+                        const sectionName = (heading && heading.textContent.trim()) || id;
+                        if (typeof gtag === 'function') {
+                            gtag('event', 'view_section', {
+                                'event_category': 'Navigation',
+                                'event_label': sectionName,
+                                'section_name': sectionName
+                            });
+                        }
+                    }
                 }
             });
         }, {
