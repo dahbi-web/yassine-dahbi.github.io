@@ -984,9 +984,10 @@ footer {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s, visibility 0.3s, transform 0.3s ease-out;
-    z-index: 1000;
+    z-index: 2147483647;
     transform: translateY(100px);
     cursor: pointer;
+    pointer-events: auto;
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
 }

@@ -575,11 +575,21 @@
 #menu-toggle.is-open .fa-bars  { display: none; }
 #menu-toggle.is-open .fa-times { display: inline-block; }
 
-/* ─── MOBILE : évite chevauchement chatbot / toast / scroll-to-top ───────── */
+/* Les conteneurs flottants ne doivent pas capter les appuis dans leurs zones
+   vides (ils recouvraient le bouton retour-en-haut). Seuls les vrais boutons
+   restent cliquables. */
+.fab-container { pointer-events: none; }
+.fab-main, .fab-btn { pointer-events: auto; }
+.toast { pointer-events: none; }
+.toast.visible { pointer-events: auto; }
+
+/* ─── MOBILE : bouton retour-en-haut au-dessus du chatbot (à DROITE), loin
+   des FAB (à gauche) qui l'écrasaient dans le coin bas-gauche ─────────────── */
 @media (max-width: 480px) {
   #scroll-to-top {
-    right: auto;
-    left: 1rem;
+    left: auto;
+    right: 1rem;
+    bottom: var(--chatbot-clearance-mobile);
   }
   .toast {
     bottom: var(--chatbot-clearance-mobile);
