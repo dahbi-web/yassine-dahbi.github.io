@@ -18,6 +18,10 @@
   --orbit-r: 185px;
   --chatbot-clearance:        5.5rem; /* chatbot bottom 24px + height 56px + 8px = 88px */
   --chatbot-clearance-mobile: 5rem;   /* chatbot bottom 16px + height 56px + 8px = 80px */
+  /* Le toast se place AU-DESSUS du bouton scroll-to-top (qui mesure 40px)
+     lorsqu'ils partagent le coin bas-droit, pour éviter tout chevauchement. */
+  --toast-clearance:          9rem;   /* bouton à 88px + 40px + marge  = ~144px */
+  --toast-clearance-mobile:   8.5rem; /* bouton à 80px + 40px + marge  = ~136px */
 }
 @media (max-width: 900px) { :root { --orbit-r: 160px; } }
 @media (max-width: 600px) { :root { --orbit-r: 130px; } }
@@ -577,19 +581,20 @@
 
 /* ─── MOBILE : évite chevauchement chatbot / toast / scroll-to-top ───────── */
 @media (max-width: 480px) {
+  /* On garde le bouton à droite, empilé AU-DESSUS du chatbot, pour éviter
+     le chevauchement avec le menu d'actions rapides (FAB) situé en bas à gauche. */
   #scroll-to-top {
-    right: auto;
-    left: 1rem;
+    bottom: var(--chatbot-clearance-mobile);
   }
   .toast {
-    bottom: var(--chatbot-clearance-mobile);
+    bottom: var(--toast-clearance-mobile);
   }
 }
 
-/* ─── TABLETTE : monte le toast au-dessus du chatbot ────────────────────── */
+/* ─── TABLETTE : monte le toast au-dessus du bouton scroll-to-top ────────── */
 @media (min-width: 481px) and (max-width: 768px) {
   .toast {
-    bottom: var(--chatbot-clearance-mobile);
+    bottom: var(--toast-clearance);
   }
 }
 
