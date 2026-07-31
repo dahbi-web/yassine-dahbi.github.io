@@ -41,6 +41,7 @@
     <link rel="stylesheet" href="style.min.css?v=3">
     <link rel="stylesheet" href="animations.css?v=3">
     <link rel="stylesheet" href="chatbot.css?v=5">
+    <link rel="stylesheet" href="rating.css?v=1">
 
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
@@ -146,6 +147,7 @@
                     <li><a href="#education" title="Formation">🎓 <span class="nav-text">Formation</span></a></li>
                     <li><a href="#recommandations" title="Recommandations">👍 <span
                                 class="nav-text">Recommandations</span></a></li>
+                    <li><a href="#noter" title="Noter ce portfolio">⭐ <span class="nav-text">Noter</span></a></li>
                 </ul>
             </nav>
 
@@ -872,6 +874,32 @@
             </div>
         </section>
 
+        <section id="noter" class="animated-section">
+            <h2>Notez ce portfolio</h2>
+            <div class="rating-box" id="rating-box">
+                <p class="rating-lead">Votre avis compte ! Attribuez une note, et laissez un commentaire si vous le
+                    souhaitez.</p>
+
+                <div class="rating-stars" id="rating-stars" role="radiogroup" aria-label="Note sur 5 étoiles">
+                    <button type="button" data-value="5" aria-label="5 étoiles">★</button>
+                    <button type="button" data-value="4" aria-label="4 étoiles">★</button>
+                    <button type="button" data-value="3" aria-label="3 étoiles">★</button>
+                    <button type="button" data-value="2" aria-label="2 étoiles">★</button>
+                    <button type="button" data-value="1" aria-label="1 étoile">★</button>
+                </div>
+
+                <textarea id="rating-comment" class="rating-field" rows="3" maxlength="1000"
+                    placeholder="Votre commentaire (optionnel)…"></textarea>
+                <input type="text" id="rating-name" class="rating-field" maxlength="120"
+                    placeholder="Votre nom (optionnel)">
+
+                <button type="button" id="rating-submit" class="rating-submit">Envoyer ma note</button>
+
+                <p class="rating-average" id="rating-average" aria-live="polite"></p>
+                <p class="rating-feedback" id="rating-feedback" aria-live="polite"></p>
+            </div>
+        </section>
+
 
 
     </main>
@@ -1092,6 +1120,7 @@
     <script src="script.min.js?v=5" defer></script>
     <script src="animations.js" defer></script>
     <script src="chatbot.js?v=9" defer></script>
+    <script src="rating.js?v=1" defer></script>
 </body>
 
 </html>

@@ -1,0 +1,172 @@
+/* ═══════════════════════════════════════════════
+   NOTATION ★ — « Notez ce portfolio »
+   Portfolio Yassine Dahbi
+   ═══════════════════════════════════════════════ */
+
+.rating-box {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 28px 26px;
+  border-radius: 18px;
+  background: var(--surface-color, rgba(255, 255, 255, 0.7));
+  border: 1px solid var(--border-color, rgba(0, 0, 0, 0.1));
+  box-shadow: var(--shadow-color, 0 8px 32px rgba(31, 38, 135, 0.07));
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  text-align: center;
+}
+
+.rating-lead {
+  margin: 0 0 18px;
+  color: var(--text-color, #0f172a);
+  opacity: 0.85;
+  font-size: 1rem;
+}
+
+/* ── Les étoiles ── */
+.rating-stars {
+  display: inline-flex;
+  flex-direction: row-reverse; /* permet le survol « toutes celles à gauche » via CSS */
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+
+.rating-stars button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 2.1rem;
+  line-height: 1;
+  padding: 2px;
+  color: var(--border-color, #cbd5e1);
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.rating-stars button:hover {
+  transform: scale(1.18);
+}
+
+/* Survol : l'étoile pointée et toutes celles à sa gauche (grâce au row-reverse). */
+.rating-stars button:hover,
+.rating-stars button:hover ~ button {
+  color: #ffb400;
+}
+
+/* Sélection validée (classe ajoutée par JS). */
+.rating-stars button.selected {
+  color: #ffb400;
+}
+
+/* ── Champs ── */
+.rating-field {
+  width: 100%;
+  border: 1px solid var(--border-color, rgba(0, 0, 0, 0.1));
+  border-radius: 12px;
+  padding: 11px 14px;
+  margin-bottom: 12px;
+  font-family: inherit;
+  font-size: 0.92rem;
+  background: var(--surface-color, #fff);
+  color: var(--text-color, #0f172a);
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.rating-field:focus {
+  border-color: var(--primary-color, #00e5ff);
+}
+
+.rating-field::placeholder { color: var(--secondary-color, #8892b0); opacity: 0.8; }
+
+textarea.rating-field {
+  resize: vertical;
+  min-height: 74px;
+}
+
+/* ── Bouton d'envoi ── */
+.rating-submit {
+  border: none;
+  border-radius: 24px;
+  padding: 11px 30px;
+  font-family: var(--font-heading, 'Rajdhani', sans-serif);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #fff;
+  cursor: pointer;
+  /* Même dégradé que le bouton du chatbot (var --primary-color fiable, ≈ bleu). */
+  background: linear-gradient(135deg, var(--primary-color, #00e5ff), #0099cc);
+  box-shadow: 0 4px 16px rgba(0, 123, 255, 0.35);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s;
+}
+
+.rating-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(0, 123, 255, 0.5);
+}
+
+.rating-submit:active { transform: translateY(0); }
+
+.rating-submit:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ── Moyenne + message d'état ── */
+.rating-average {
+  margin-top: 16px;
+  font-family: var(--font-heading, 'Rajdhani', sans-serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-color, #0f172a);
+  min-height: 1.4em;
+}
+
+.rating-average .star-icon { color: #ffb400; }
+
+.rating-feedback {
+  margin-top: 12px;
+  font-size: 0.92rem;
+  min-height: 1.2em;
+}
+
+.rating-feedback.ok    { color: #16a34a; }
+.rating-feedback.error { color: #dc2626; }
+
+/* ── Thème sombre (surcharges explicites, comme chatbot.css) ──
+   Couleurs concrètes plutôt que var(--surface-color) : cette variable est
+   redéfinie plus haut dans l'arbre et se réinitialise en clair dans ce
+   sous-arbre. On force donc les mêmes teintes que les cartes du site. */
+[data-theme="dark"] .rating-box {
+  background: rgba(30, 30, 30, 0.6);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .rating-lead,
+[data-theme="dark"] .rating-average {
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .rating-field {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.14);
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .rating-field::placeholder { color: rgba(255, 255, 255, 0.45); }
+
+[data-theme="dark"] .rating-stars button { color: rgba(255, 255, 255, 0.25); }
+[data-theme="dark"] .rating-stars button.selected,
+[data-theme="dark"] .rating-stars button:hover,
+[data-theme="dark"] .rating-stars button:hover ~ button { color: #ffb400; }
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .rating-box { padding: 22px 18px; }
+  .rating-stars button { font-size: 1.85rem; }
+}
